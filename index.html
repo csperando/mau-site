@@ -14,5 +14,22 @@
     </head>
     <body>
         <p>Hello!</p>
+
+
+        <script>
+            const games = fetch("https://mau-rest.herokuapp.com/mau");
+            games.then((res) => {
+                return res.json();
+
+            }).then((res) => {
+                console.log(res);
+                
+            }).catch((error) => {
+                console.error(error);
+
+            });
+
+        </script>
+
     </body>
 </html>
