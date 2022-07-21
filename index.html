@@ -5,31 +5,53 @@
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <meta name="description" content=""/>
         <title>Coleman and Ty Play Mau</title>
-
+        <script src="./js/libs/vue.js"></script>
         <link rel="stylesheet" type="text/css" href="./css/main.css"/>
         <link rel="preload" as="style" href="./css/main.css"/>
-
-        <script src="./js/libs/vue.js"></script>
-        <script src="./js/app.vue"></script>
     </head>
     <body>
-        <p>Hello!</p>
+        <div id="app">
+            <dashboard :game-data="gameData"></dashboard>
+        </div>
 
 
-        <script>
-            const games = fetch("https://mau-rest.herokuapp.com/mau");
-            games.then((res) => {
-                return res.json();
-
-            }).then((res) => {
-                console.log(res);
-                
-            }).catch((error) => {
-                console.error(error);
-
-            });
-
+        <script type="text/x-template" id="mau-header-component">
+            <header>
+                <nav>
+                    <span></span>
+                    <!-- <span><a href="#">view on github</a></span> -->
+                </nav>
+            </header>
         </script>
 
+        <script type="text/x-template" id="dashboard-component">
+            <div>
+                <mau-header></mau-header>
+
+                <main>
+                    <p>Coming Soon!</p>
+                    <!-- <span>{{ gameData }}</span> -->
+                </main>
+
+                <div id="data-dump"></div>
+            </div>
+        </script>
+
+        <script>
+            // const games = fetch("https://mau-rest.herokuapp.com/mau");
+            // games.then((res) => {
+            //     return res.json();
+            //
+            // }).then((res) => {
+            //     const d = document.getElementById("data-dump");
+            //     d.innerHTML = JSON.stringify(res, null, 2);
+            //
+            // }).catch((error) => {
+            //     // console.error(error);
+            //
+            // });
+        </script>
+
+        <script src="./js/app.vue"></script>
     </body>
 </html>
