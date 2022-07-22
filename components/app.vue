@@ -7,40 +7,48 @@ let mauHeader = {
 let mauStats = {
     template: "#mau-stats-component",
     props: ["games"],
-    computed: {
-        wins: function() {
+    methods: {
+        getWins: function() {
             try {
                 var wins = this.games.map((obj) => {
                     return obj.winner.name;
                 });
+
                 var ty = wins.filter((el) => {
                     return el === "Ty";
                 });
+
                 var coleman = wins.filter((el) => {
                     return el == "Coleman";
-                })
-                return {
-                    "Ty": ty.length,
-                    "Coleman": coleman.length
-                }
+                });
+
+                return { "Ty": ty.length, "Coleman": coleman.length };
 
             } catch(error) {
+                return {};
 
             }
         },
-        winPercent: function() {
+        getWinPercent: function() {
             try {
                 var total = this.games.length;
-                var ty = Math.floor(100 * total / this.wins.ty);
-                var coleman = Math.floor(100 * total / this.wins.coleman);
-                return {
-                    "Ty": ty,
-                    "Coleman": coleman
-                }
+                var wins = this.getWins();
+                var ty = Math.floor(100 * wins.Ty / total);
+                var coleman = Math.floor(100 * wins.Coleman / total);
+                return { "Ty": `${ty}%`, "Coleman": `${coleman}%` };
 
             } catch(error) {
+                return {"error": error.message};
 
             }
+        }
+    },
+    computed: {
+        stats: function() {
+            return {
+                "wins": this.getWins(),
+                "winPercent": this.getWinPercent()
+            };
         }
     }
 }
@@ -51,7 +59,7 @@ let dashboard = {
     props: [],
     data: function() {
         return {
-            "games": {}
+            "games": []
         }
     },
     components: {
