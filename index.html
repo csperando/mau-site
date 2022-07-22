@@ -12,7 +12,7 @@
     </head>
     <body>
         <div id="app">
-            <dashboard :game-data="gameData"></dashboard>
+            <dashboard></dashboard>
         </div>
 
 
@@ -25,34 +25,26 @@
             </header>
         </script>
 
+        <script type="text/x-template" id="mau-stats-component">
+            <div>
+                <p><b>Stats</b></p>
+                <div class="mau-stats-wins">Wins: {{wins}}</div>
+                <div class="mau-stats-winPercent">Win Percentage: {{winPercent}}</div>
+            </div>
+        </script>
+
         <script type="text/x-template" id="dashboard-component">
             <div>
                 <mau-header></mau-header>
 
                 <main>
-                    <p>Coming Soon!</p>
-                    <!-- <span>{{ gameData }}</span> -->
+                    <mau-stats :games="games"></mau-stats>
                 </main>
 
                 <div id="data-dump"></div>
             </div>
         </script>
 
-        <script>
-            // const games = fetch("https://mau-rest.herokuapp.com/mau");
-            // games.then((res) => {
-            //     return res.json();
-            //
-            // }).then((res) => {
-            //     const d = document.getElementById("data-dump");
-            //     d.innerHTML = JSON.stringify(res, null, 2);
-            //
-            // }).catch((error) => {
-            //     // console.error(error);
-            //
-            // });
-        </script>
-
-        <script src="./js/app.vue"></script>
+        <script src="./components/app.vue"></script>
     </body>
 </html>
