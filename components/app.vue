@@ -41,13 +41,61 @@ let mauStats = {
                 return {"error": error.message};
 
             }
+        },
+        getLongestStreak: function() {
+            try{
+                var ty = 0;
+                var coleman = 0;
+
+                for(var game of this.games) {
+                    var streakC = 0;
+                    var streakT = 0;
+
+                    for(var round of game.rounds) {
+                        if(round.winner.name == "Ty") {
+                            streakT += 1;
+                            ty = (streakT > ty) ? streakT : ty;
+                            streakC = 0;
+                        } else {
+                            streakC += 1;
+                            coleman = (streakC > coleman) ? streakC : coleman;
+                        }
+                    }
+                }
+
+                return { "Ty": ty, "Coleman": coleman };
+
+            } catch(error) {
+                // console.error(error);
+                return { "Error": error.message };
+            }
+        },
+        getSavage: function() {
+            try {
+                var array = [0];
+                for(var game of this.games) {
+                    for(var round of game.rounds) {
+                        array.push((round.winner.name === "Ty") ? round.points : -1 * round.points);
+                    }
+                }
+
+                var coleman = -1 * Math.min(...array);
+                var ty = Math.max(...array);
+
+                return { "Ty": ty, "Coleman": coleman };
+
+            } catch(error) {
+
+            }
         }
     },
     computed: {
         stats: function() {
             return {
                 "wins": this.getWins(),
-                "winPercent": this.getWinPercent()
+                "winPercent": this.getWinPercent(),
+                "longestStreak": this.getLongestStreak(),
+                "savage": this.getSavage()
             };
         }
     }
