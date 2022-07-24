@@ -4,11 +4,18 @@ let newGame = {
 }
 
 
+let menu = {
+    template: "#mau-menu-component",
+    props: []
+}
+
+
 let modalView = {
     template: "#mau-modal-view-component",
     props: ["view"],
     components: {
-        "new-game": newGame
+        "new-game": newGame,
+        "mau-menu": menu
     }
 }
 

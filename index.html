@@ -27,6 +27,18 @@
 
 
         <!-- Vue Components -->
+        <script type="text/x-template" id="mau-menu-component">
+            <div>
+                <div v-if="true" class="flex-col flex-center small-gap">
+                    <span>login</span>
+                    <span>signup</span>
+                </div>
+                <div v-else class="flex-col flex-center small-gap">
+                    <span>settings</span>
+                    <span>new game</span>
+                </div>
+            </div>
+        </script>
         <script type="text/x-template" id="mau-modal-component">
             <div
                 @click="hideModal"
@@ -34,7 +46,7 @@
                 class="modal">
                 <div class="dark-background"></div>
                 <div class="modal-view">
-                    <modal-view view="newGame"></modal-view>
+                    <modal-view view="menu"></modal-view>
                 </div>
             </div>
         </script>
@@ -43,7 +55,7 @@
                 <new-game></new-game>
             </div>
             <div v-else-if="view == 'menu'">
-                <span>Menu</span>
+                <mau-menu></mau-menu>
             </div>
             <div v-else>
                 <span>Error</span>
