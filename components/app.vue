@@ -1,6 +1,46 @@
+let newGame = {
+    template: "#mau-new-game-component",
+    props: []
+}
+
+
+let modalView = {
+    template: "#mau-modal-view-component",
+    props: ["view"],
+    components: {
+        "new-game": newGame
+    }
+}
+
+
+let modal = {
+    template: "#mau-modal-component",
+    props: ["modalActive"],
+    components: {
+        "modal-view": modalView
+    }, data: function() {
+        return {
+            isActive: this.modalActive
+        }
+    },
+    methods: {
+        hideModal: function(event) {
+            if(event.target.className == "dark-background") {
+                this.$emit("hide-modal");
+            }
+        }
+    }
+}
+
+
 let mauHeader = {
     template: "#mau-header-component",
-    props: []
+    props: [],
+    methods: {
+        toggleModal: function() {
+            this.$emit("toggle-modal", "menu");
+        }
+    }
 }
 
 
@@ -107,12 +147,14 @@ let dashboard = {
     props: [],
     data: function() {
         return {
-            "games": []
+            "games": [],
+            "modalActive": false
         }
     },
     components: {
         "mau-header": mauHeader,
-        "mau-stats": mauStats
+        "mau-stats": mauStats,
+        "modal": modal
     },
     created: function() {
         const g = fetch("https://mau-rest.herokuapp.com/mau");
@@ -128,7 +170,12 @@ let dashboard = {
         });
     },
     methods: {
-
+        toggleModal: function(payload) {
+            this.modalActive = !this.modalActive
+        },
+        hideModal: function(payload) {
+            this.modalActive = false;
+        }
     }
 }
 

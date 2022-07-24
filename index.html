@@ -5,26 +5,139 @@
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <meta name="description" content=""/>
         <title>Coleman and Ty Play Mau</title>
+        <link rel="icon" type="image/x-icon" href="./favicon.ico"/>
+
+        <!-- Import Vue -->
         <script src="./js/libs/vue.js"></script>
+
+        <!-- Styles -->
         <link rel="stylesheet" type="text/css" href="./css/main.css"/>
         <link rel="preload" as="style" href="./css/main.css"/>
-        <link rel="icon" type="image/x-icon" href="./favicon.ico"/>
+
+        <!-- Component Styles -->
+        <link rel="stylesheet" type="text/css" href="./css/header.css"/>
+        <link rel="stylesheet" type="text/css" href="./css/modal.css"/>
+        <link rel="stylesheet" type="text/css" href="./css/newGame.css"/>
     </head>
+
     <body>
         <div id="app">
             <dashboard></dashboard>
         </div>
 
 
+        <!-- Vue Components -->
+        <script type="text/x-template" id="mau-modal-component">
+            <div
+                @click="hideModal"
+                v-show="modalActive"
+                class="modal">
+                <div class="dark-background"></div>
+                <div class="modal-view">
+                    <modal-view view="newGame"></modal-view>
+                </div>
+            </div>
+        </script>
+        <script type="text/x-template" id="mau-modal-view-component">
+            <div v-if="view == 'newGame'">
+                <new-game></new-game>
+            </div>
+            <div v-else-if="view == 'menu'">
+                <span>Menu</span>
+            </div>
+            <div v-else>
+                <span>Error</span>
+            </div>
+        </script>
+        <script type="text/x-template" id="mau-new-game-component">
+            <form action="" method="POST">
+                <p class="text-center"><b>Add a New Game!</b></p>
+
+
+                <div class="space-around">
+                    <p class="text-center"><b>Overall</b></p>
+                    <div class="two-col">
+                        <div class="flex-col">
+                            <label for="winner">Winner</label>
+                            <input type="text"/>
+                        </div>
+                        <div class="flex-col">
+                            <label for="loser">Loser</label>
+                            <input type="text"/>
+                        </div>
+                    </div>
+
+                    <div class="flex-col">
+                        <label class="text-center" for="score">Score</label>
+                        <div class="flex-row flex-center">
+                            <input type="number"/>
+                            <span>&nbsp;&nbsp;<em>to</em>&nbsp;&nbsp;</span>
+                            <input type="number"/>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="space-around">
+                    <p class="text-center"><b>Rounds</b></p>
+
+                    <p>Round 1</p>
+                    <div class="two-col">
+                        <div class="flex-col">
+                            <label for="round-1-winner">Winner</label>
+                            <input type="text"/>
+                        </div>
+                        <div class="flex-col">
+                            <label for="round-1-loser">Loser</label>
+                            <input type="text"/>
+                        </div>
+                    </div>
+
+                    <div class="flex-col">
+                        <label class="text-center" for="round-1-points">Points</label>
+                        <div class="flex-row flex-center">
+                            <input type="number"/>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="space-around">
+                    <div class="flex-row flex-center">
+                        <div class="new-round-btn flex-row flex-center small-gap">
+                            <img src="./images/icons/plus.svg" alt="plus sign" width="16" height="16"/>
+                            <span>add round</span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="space-around">
+                    <div class="flex-row flex-center">
+                        <input type="button" value="Submit"/>
+                    </div>
+                </div>
+
+            </form>
+        </script>
         <script type="text/x-template" id="mau-header-component">
             <header>
-                <nav>
+                <nav class="mau-nav">
                     <span></span>
-                    <!-- <span><a href="#">view on github</a></span> -->
+                    <div @click="toggleModal">
+                        <img src="./images/icons/menu.svg" alt="menu" width="30" height="30"/>
+                    </div>
                 </nav>
             </header>
         </script>
-
+        <script type="text/x-template" id="mau-menu-component">
+            <div>
+                <div></div>
+                <div>
+                    <p>login</p>
+                </div>
+            </div>
+        </script>
         <script type="text/x-template" id="mau-stats-component">
             <div>
                 <p><b>Stats</b></p>
@@ -35,19 +148,20 @@
 
             </div>
         </script>
-
         <script type="text/x-template" id="dashboard-component">
             <div>
-                <mau-header></mau-header>
+                <mau-header @toggle-modal="toggleModal"></mau-header>
 
                 <main>
                     <mau-stats :games="games"></mau-stats>
                 </main>
 
-                <div id="data-dump"></div>
+                <modal @hide-modal="hideModal" :modalActive="modalActive"></modal>
             </div>
         </script>
 
+        <!-- Root -->
         <script src="./components/app.vue"></script>
+
     </body>
 </html>
