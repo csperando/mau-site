@@ -1,0 +1,15 @@
+.mau-stats {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    margin-top: 50px;
+}
+
+.mau-stat {
+    font-size: 48px;
+    font-weight: bold;
+    color: purple;
+    text-shadow: 1px 1px 1px black;
+}
