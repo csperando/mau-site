@@ -8,7 +8,7 @@ let login = {
     props: [],
     methods: {
         loginUser: function() {
-            const loginReq = fetch("https://www.mau-rest.herokuapp.com/auth/login",
+            const loginReq = fetch("https://mau-rest.herokuapp.com/auth/login",
             {
                 method: "POST",
                 mode: "cors"
@@ -30,7 +30,7 @@ let signup = {
     props: [],
     methods: {
         signupUser: function() {
-            const signupReq = fetch("https://www.mau-rest.herokuapp.com/auth/signup",
+            const signupReq = fetch("https://mau-rest.herokuapp.com/auth/signup",
             {
                 method: "POST",
                 mode: "cors"
