@@ -11,7 +11,7 @@
     top: 0;
     width: 100vw;
     height: 100vh;
-    background: url("/images/poker.svg");
+    background: url("../images/poker.svg");
     opacity: 0.1;
 }
 
