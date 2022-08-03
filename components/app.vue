@@ -6,18 +6,42 @@ let newGame = {
 let login = {
     template: "#mau-login-component",
     props: [],
+    data: function() {
+        return {
+            username: null,
+            password: null
+        }
+    },
     methods: {
         loginUser: function() {
+            this.$emit("authStart");
+
+            let req = {
+                username: this.username,
+                password: this.password
+            };
+
             const loginReq = fetch("https://mau-rest.herokuapp.com/auth/login",
             {
                 method: "POST",
-                mode: "cors"
+                mode: "cors",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify(req)
             });
             loginReq.then((res) => {
+                return res.json();
+
+            }).then((res) => {
                 console.log(res);
 
-            }).catch((error) => {
-                // console.error(error);
+            }).catch((err) => {
+                console.log(err);
+
+            }).finally(() => {
+                this.$emit("authEnd");
 
             });
         }
@@ -28,19 +52,51 @@ let login = {
 let signup = {
     template: "#mau-signup-component",
     props: [],
+    data: function() {
+        return {
+            firstName: null,
+            lastName: null,
+            email: null,
+            username: null,
+            password: null,
+            confirm: null
+        }
+    },
     methods: {
         signupUser: function() {
+            this.$emit("authStart");
+
+            let req = {
+                firstName: this.firstName,
+                lastName: this.lastName,
+                email: this.email,
+                username: this.username,
+                password: this.password,
+                confirm: this.confirm
+            }
+
             const signupReq = fetch("https://mau-rest.herokuapp.com/auth/signup",
             {
                 method: "POST",
-                mode: "cors"
+                mode: "cors",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify(req)
             });
             signupReq.then((res) => {
+                return res.json();
+
+            }).then((res) => {
                 console.log(res);
 
             }).catch((error) => {
                 console.error(error);
 
+            }).finally(() => {
+                this.$emit("authEnd");
+                
             });
         }
     }
@@ -51,7 +107,9 @@ let menu = {
     props: [],
     data: function() {
         return {
-            "activeForm": null
+            "activeForm": null,
+            "loggedOut": true,
+            "loading": false
         }
     },
     components: {
@@ -64,6 +122,9 @@ let menu = {
         },
         toggleSignup: function() {
             this.activeForm = (this.activeForm == "signup") ? null : "signup";
+        },
+        toggleLoader: function() {
+            this.loading = !this.loading;
         }
     }
 }

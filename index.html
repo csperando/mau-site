@@ -35,11 +35,11 @@
                     <div class="flex-row">
                         <div class="flex-col">
                             <label>Username:</label>
-                            <input type="text" name="username"/>
+                            <input v-model="username" type="text" name="username"/>
                         </div>
                         <div class="flex-col">
                             <label>Password:</label>
-                            <input type="text" name="password"/>
+                            <input v-model="password" type="password" name="password"/>
                         </div>
                     </div>
                     <div class="flex-row flex-center">
@@ -55,31 +55,31 @@
                     <div class="flex-row">
                         <div class="flex-col">
                             <label>First name:</label>
-                            <input type="text" name="firstName"/>
+                            <input v-model="firstName" type="text" name="firstName"/>
                         </div>
                         <div class="flex-col">
                             <label>Last name:</label>
-                            <input type="text" name="lastName"/>
+                            <input v-model="lastName" type="text" name="lastName"/>
                         </div>
                     </div>
                     <div class="flex-row">
                         <div class="flex-col">
                             <label>Email:</label>
-                            <input type="text" name="email"/>
+                            <input v-model="email" type="text" name="email"/>
                         </div>
                         <div class="flex-col">
                             <label>Username:</label>
-                            <input type="text" name="username"/>
+                            <input v-model="username" type="text" name="username"/>
                         </div>
                     </div>
                     <div class="flex-row">
                         <div class="flex-col">
                             <label>Password:</label>
-                            <input type="text" name="password"/>
+                            <input v-model="password" type="password" name="password"/>
                         </div>
                         <div class="flex-col">
                             <label>Confirm:</label>
-                            <input type="text" name="confirm"/>
+                            <input v-model="confirm" type="password" name="confirm"/>
                         </div>
                     </div>
                     <div class="flex-row flex-center">
@@ -91,15 +91,27 @@
 
         <script type="text/x-template" id="mau-menu-component">
             <div>
-                <div v-if="true" class="flex-col flex-center small-gap">
+                <div v-if="loggedOut" class="flex-col flex-center small-gap">
                     <span @click="toggleLogin">login</span>
-                    <login v-show="activeForm == 'login'"></login>
+                    <login
+                        @authStart="toggleLoader"
+                        @authEnd="toggleLoader"
+                        v-show="activeForm == 'login'"
+                        ></login>
                     <span @click="toggleSignup">signup</span>
-                    <signup v-show="activeForm == 'signup'"></signup>
+                    <signup
+                        @authStart="toggleLoader"
+                        @authEnd="toggleLoader"
+                        v-show="activeForm == 'signup'"
+                        ></signup>
                 </div>
                 <div v-else class="flex-col flex-center small-gap">
                     <span>settings</span>
                     <span>new game</span>
+                </div>
+
+                <div v-show="loading" class="mau-menu-loading-wrap">
+                    <img src="./images/gears.svg" width="50" height="50" alt="rotating loading icon"/>
                 </div>
             </div>
         </script>
