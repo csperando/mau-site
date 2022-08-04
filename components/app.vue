@@ -297,27 +297,7 @@ let dashboard = {
             console.error(error);
 
         });
-
-        const u = fetch("https://mau-rest.herokuapp.com/auth/login",
-        {
-            method: "POST",
-            mode: "cors",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: ""
-        });
-        u.then((res) => {
-            return res.json();
-
-        }).then((res) => {
-            console.log(res);
-
-        }).catch((error) => {
-            console.error(error);
-
-        });
+        
     },
     methods: {
         toggleModal: function(payload) {
