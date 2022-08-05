@@ -26,8 +26,8 @@ let login = {
             {
                 method: "POST",
                 mode: "cors",
-                // headers: { "Accept": "application/json" },
-                credentials: "include",
+                headers: { "Accept": "application/json" },
+                // credentials: "include",
                 body: JSON.stringify(req)
             });
             loginReq.then((res) => {
