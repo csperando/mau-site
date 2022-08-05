@@ -28,7 +28,8 @@ let login = {
                 mode: "cors",
                 headers: {
                     "Content-Type": "application/json",
-                    "Accept": "application/json"
+                    "Accept": "application/json",
+                    "X-client-host": window.location.host
                 },
                 body: JSON.stringify(req)
             });
