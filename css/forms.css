@@ -1,0 +1,17 @@
+.modal-menu-option {
+    color: blue;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.modal-menu-option:hover {
+    cursor: pointer;
+    filter: brightness(0.5);
+}
+
+.modal-form-wrap {
+    width: 90%;
+    padding: 20px;
+    /* border-radius: 5px; */
+    /* background-color: rgb(230, 249, 249); */
+}

@@ -16,9 +16,21 @@
 
         <!-- Component Styles -->
         <link rel="stylesheet" type="text/css" href="./css/header.css"/>
+        <link rel="preload" as="style" href="./css/header.css"/>
+
         <link rel="stylesheet" type="text/css" href="./css/modal.css"/>
+        <link rel="preload" as="style" href="./css/modal.css"/>
+
         <link rel="stylesheet" type="text/css" href="./css/newGame.css"/>
+        <link rel="preload" as="style" href="./css/newGame.css"/>
+
         <link rel="stylesheet" type="text/css" href="./css/stats.css"/>
+        <link rel="preload" as="style" href="./css/stats.css"/>
+
+        <link rel="stylesheet" type="text/css" href="./css/forms.css"/>
+        <link rel="preload" as="style" href="./css/forms.css"/>
+
+
     </head>
 
     <body>
@@ -30,9 +42,9 @@
 
 
         <script type="text/x-template" id="mau-login-component">
-            <div>
-                <form @submit.prevent="loginUser" class="flex-col small-gap">
-                    <div class="flex-row">
+            <div class="modal-form-wrap">
+                <form @submit.prevent="loginUser" class="flex-col col-center small-gap">
+                    <div class="flex-row small-gap">
                         <div class="flex-col">
                             <label>Username:</label>
                             <input v-model="username" type="text" name="username"/>
@@ -43,16 +55,16 @@
                         </div>
                     </div>
                     <div class="flex-row flex-center">
-                        <input type="submit" value="login"/>
+                        <button type="submit" class="std-btn">login</button>
                     </div>
                 </form>
             </div>
         </script>
 
         <script type="text/x-template" id="mau-signup-component">
-            <div>
-                <form @submit.prevent="signupUser" class="flex-col small-gap">
-                    <div class="flex-row">
+            <div class="modal-form-wrap">
+                <form @submit.prevent="signupUser" class="flex-col col-center small-gap">
+                    <div class="flex-row small-gap">
                         <div class="flex-col">
                             <label>First name:</label>
                             <input v-model="firstName" type="text" name="firstName"/>
@@ -62,7 +74,7 @@
                             <input v-model="lastName" type="text" name="lastName"/>
                         </div>
                     </div>
-                    <div class="flex-row">
+                    <div class="flex-row small-gap">
                         <div class="flex-col">
                             <label>Email:</label>
                             <input v-model="email" type="text" name="email"/>
@@ -72,7 +84,7 @@
                             <input v-model="username" type="text" name="username"/>
                         </div>
                     </div>
-                    <div class="flex-row">
+                    <div class="flex-row small-gap">
                         <div class="flex-col">
                             <label>Password:</label>
                             <input v-model="password" type="password" name="password"/>
@@ -83,60 +95,45 @@
                         </div>
                     </div>
                     <div class="flex-row flex-center">
-                        <input type="submit" value="signup"/>
+                        <button type="submit" class="std-btn">Signup</button>
                     </div>
                 </form>
             </div>
         </script>
 
+        <script type="text/x-template" id="mau-user-header-component">
+            <div>
+                <p v-if="user">{{user.username}}</p>
+            </div>
+        </script>
+
         <script type="text/x-template" id="mau-menu-component">
             <div>
-                <div v-if="loggedOut" class="flex-col flex-center small-gap">
-                    <span @click="toggleLogin">login</span>
+                <div v-show="loggedOut" class="flex-col flex-center small-gap">
+                    <span class="modal-menu-option" @click="toggleLogin">login</span>
                     <login
-                        @authStart="toggleLoader"
-                        @authEnd="toggleLoader"
+                        @authStart="showLoader"
+                        @authEnd="hideLoader"
+                        @loggedIn="loggedIn"
                         v-show="activeForm == 'login'"
                         ></login>
-                    <span @click="toggleSignup">signup</span>
+                    <span class="modal-menu-option" @click="toggleSignup">signup</span>
                     <signup
-                        @authStart="toggleLoader"
-                        @authEnd="toggleLoader"
+                        @authStart="showLoader"
+                        @authEnd="hideLoader"
                         v-show="activeForm == 'signup'"
                         ></signup>
                 </div>
-                <div v-else class="flex-col flex-center small-gap">
-                    <span>settings</span>
-                    <span>new game</span>
+                <div v-show="!loggedOut" class="flex-col flex-center small-gap">
+                    <user-header :user="user"></user-header>
+                    <span class="modal-menu-option">settings</span>
+                    <span class="modal-menu-option">new game</span>
                 </div>
 
                 <div v-show="loading" class="mau-menu-loading-wrap">
-                    <img src="./images/gears.svg" width="50" height="50" alt="rotating loading icon"/>
+                    <div class="dark-background"></div>
+                    <img src="./images/gears.svg" width="150" height="150" alt="rotating loading icon"/>
                 </div>
-            </div>
-        </script>
-
-        <script type="text/x-template" id="mau-modal-component">
-            <div
-                @click="hideModal"
-                v-show="modalActive"
-                class="modal">
-                <div class="dark-background"></div>
-                <div class="modal-view">
-                    <modal-view view="menu"></modal-view>
-                </div>
-            </div>
-        </script>
-
-        <script type="text/x-template" id="mau-modal-view-component">
-            <div v-if="view == 'newGame'">
-                <new-game></new-game>
-            </div>
-            <div v-else-if="view == 'menu'">
-                <mau-menu></mau-menu>
-            </div>
-            <div v-else>
-                <span>Error</span>
             </div>
         </script>
 
@@ -212,6 +209,37 @@
             </form>
         </script>
 
+        <script type="text/x-template" id="mau-modal-view-component">
+            <div v-if="view == 'newGame'">
+                <new-game></new-game>
+            </div>
+            <div v-else-if="view == 'menu'">
+                <mau-menu
+                    @loggedIn="loggedIn"
+                    :user="user"
+                    ></mau-menu>
+            </div>
+            <div v-else>
+                <span>Error</span>
+            </div>
+        </script>
+
+        <script type="text/x-template" id="mau-modal-component">
+            <div
+                @click="hideModal"
+                v-show="modalActive"
+                class="modal">
+                <div class="dark-background"></div>
+                <div class="modal-view">
+                    <modal-view
+                        view="menu"
+                        @loggedIn="loggedIn"
+                        :user="user"
+                        ></modal-view>
+                </div>
+            </div>
+        </script>
+
         <script type="text/x-template" id="mau-header-component">
             <header>
                 <nav class="mau-nav">
@@ -223,23 +251,14 @@
             </header>
         </script>
 
-        <script type="text/x-template" id="mau-menu-component">
-            <div>
-                <div></div>
-                <div>
-                    <p>login</p>
-                </div>
-            </div>
-        </script>
-
         <script type="text/x-template" id="mau-stats-component">
             <div>
 
-                <div class="mau-stats">
+                <div v-if="!loadingStats" class="mau-stats">
                     <div class="mau-stats-wins">
                         <p class="text-center title">Wins</p>
                         <div class="flex-row flex-center small-gap">
-                            <span class="mau-stat green">{{stats.wins.Ty}}</span>
+                            <span class="mau-stat text-right green">{{stats.wins.Ty}}</span>
                             <span class="mau-stat">{{stats.wins.Coleman}}</span>
                         </div>
                     </div>
@@ -247,7 +266,7 @@
                     <div class="mau-stats-winPercent">
                         <p class="text-center title">Win Percentage</p>
                         <div class="flex-row flex-center small-gap">
-                            <span class="mau-stat green">{{stats.winPercent.Ty}}</span>
+                            <span class="mau-stat text-right green">{{stats.winPercent.Ty}}</span>
                             <span class="mau-stat">{{stats.winPercent.Coleman}}</span>
                         </div>
                     </div>
@@ -255,7 +274,7 @@
                     <div class="mau-stats-streak">
                         <p class="text-center title">Longest Streak (Rounds)</p>
                         <div class="flex-row flex-center small-gap">
-                            <span class="mau-stat green">{{stats.longestStreak.Ty}}</span>
+                            <span class="mau-stat text-right green">{{stats.longestStreak.Ty}}</span>
                             <span class="mau-stat">{{stats.longestStreak.Coleman}}</span>
                         </div>
                     </div>
@@ -263,11 +282,23 @@
                     <div class="mau-stats-savage">
                         <p class="text-center title">Most Savage Round</p>
                         <div class="flex-row flex-center small-gap">
-                            <span class="mau-stat green">{{stats.savage.Ty}}</span>
+                            <span class="mau-stat text-right green">{{stats.savage.Ty}}</span>
                             <span class="mau-stat">{{stats.savage.Coleman}}</span>
                         </div>
                     </div>
+                </div> <!-- end mau-stats -->
 
+                <div v-else class="mau-stats mau-stats-loading">
+                    <div class="flex-row flex-center">
+                        <span class="text-center title">
+                            Loading Stats
+                        </span>
+                        <img class="align-bottom" src="./images/dots.svg" width="40" height="30" alt="disapearing ellipses loading animation"/>
+                    </div>
+                    <div class="flex-row flex-center small-gap">
+                        <span class="mau-stat green text-right">T</span>
+                        <span class="mau-stat">C</span>
+                    </div>
                 </div>
 
             </div>
@@ -278,10 +309,18 @@
                 <mau-header @toggle-modal="toggleModal"></mau-header>
 
                 <main>
-                    <mau-stats :games="games"></mau-stats>
+                    <mau-stats
+                        :games="games"
+                        :loadingStats="loadingStats"
+                        ></mau-stats>
                 </main>
 
-                <modal @hide-modal="hideModal" :modalActive="modalActive"></modal>
+                <modal
+                    @hide-modal="hideModal"
+                    :modalActive="modalActive"
+                    @loggedIn="loggedIn"
+                    :user="user"
+                    ></modal>
             </div>
         </script>
 

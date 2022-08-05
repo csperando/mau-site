@@ -36,7 +36,9 @@ let login = {
                 return res.json();
 
             }).then((res) => {
-                console.log(res);
+                if(res.statusCode == 200) {
+                    this.$emit("loggedIn", res.data);
+                }
 
             }).catch((err) => {
                 console.log(err);
@@ -104,19 +106,25 @@ let signup = {
 }
 
 
+let userHeader = {
+    template: "#mau-user-header-component",
+    props: ["user"]
+}
+
+
 let menu = {
     template: "#mau-menu-component",
-    props: [],
+    props: ["user"],
     data: function() {
         return {
             "activeForm": null,
-            "loggedOut": true,
             "loading": false
         }
     },
     components: {
         "login": login,
-        "signup": signup
+        "signup": signup,
+        "user-header": userHeader
     },
     methods: {
         toggleLogin: function() {
@@ -125,8 +133,19 @@ let menu = {
         toggleSignup: function() {
             this.activeForm = (this.activeForm == "signup") ? null : "signup";
         },
-        toggleLoader: function() {
-            this.loading = !this.loading;
+        showLoader: function() {
+            this.loading = true;
+        },
+        hideLoader: function() {
+            this.loading = false;
+        },
+        loggedIn: function(user) {
+            this.$emit("loggedIn", user);
+        }
+    },
+    computed: {
+        loggedOut: function() {
+            return this.user == null;
         }
     }
 }
@@ -134,17 +153,22 @@ let menu = {
 
 let modalView = {
     template: "#mau-modal-view-component",
-    props: ["view"],
+    props: ["view", "user"],
     components: {
         "new-game": newGame,
         "mau-menu": menu
+    },
+    methods: {
+        loggedIn: function(user) {
+            this.$emit("loggedIn", user);
+        }
     }
 }
 
 
 let modal = {
     template: "#mau-modal-component",
-    props: ["modalActive"],
+    props: ["modalActive", "user"],
     components: {
         "modal-view": modalView
     }, data: function() {
@@ -157,6 +181,9 @@ let modal = {
             if(event.target.className == "dark-background") {
                 this.$emit("hide-modal");
             }
+        },
+        loggedIn: function(user) {
+            this.$emit("loggedIn", user);
         }
     }
 }
@@ -175,7 +202,7 @@ let mauHeader = {
 
 let mauStats = {
     template: "#mau-stats-component",
-    props: ["games"],
+    props: ["games", "loadingStats"],
     methods: {
         getWins: function() {
             try {
@@ -277,7 +304,9 @@ let dashboard = {
     data: function() {
         return {
             "games": [],
-            "modalActive": false
+            "modalActive": false,
+            "loadingStats": true,
+            "user": null
         }
     },
     components: {
@@ -292,12 +321,13 @@ let dashboard = {
 
         }).then((res) => {
             this.games = res;
+            this.loadingStats = false;
 
         }).catch((error) => {
             console.error(error);
 
         });
-        
+
     },
     methods: {
         toggleModal: function(payload) {
@@ -305,6 +335,9 @@ let dashboard = {
         },
         hideModal: function(payload) {
             this.modalActive = false;
+        },
+        loggedIn: function(user) {
+            this.user = user;
         }
     }
 }
