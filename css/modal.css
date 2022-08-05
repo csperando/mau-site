@@ -25,6 +25,8 @@
     border-radius: 20px;
     padding: 30px;
     box-shadow: 3px 3px 5px gray;
+    max-height: 80vh;
+    overflow-y: scroll;
 }
 
 .mau-menu-loading-wrap {

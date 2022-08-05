@@ -92,3 +92,7 @@
     filter: brightness(1.2);
     cursor: pointer;
 }
+
+.tilted {
+    transform: rotate(10deg);
+}

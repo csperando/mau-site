@@ -102,39 +102,30 @@
         </script>
 
         <script type="text/x-template" id="mau-user-header-component">
-            <div>
-                <p v-if="user">{{user.username}}</p>
+            <div v-if="user">
+                <div class="flex-row flex-center space-around">
+                    <img class="tilted" src="/images/6Spades.svg" alt="six of spades playing card" height="100" width="100"/>
+                    <div class="flex-col small-gap">
+                        <p class="text-center title">{{user.username}}</p>
+                        <p class="text-center">{{user.firstName}} {{user.lastName}}</p>
+                    </div>
+                </div>
             </div>
         </script>
 
-        <script type="text/x-template" id="mau-menu-component">
-            <div>
-                <div v-show="loggedOut" class="flex-col flex-center small-gap">
-                    <span class="modal-menu-option" @click="toggleLogin">login</span>
-                    <login
-                        @authStart="showLoader"
-                        @authEnd="hideLoader"
-                        @loggedIn="loggedIn"
-                        v-show="activeForm == 'login'"
-                        ></login>
-                    <span class="modal-menu-option" @click="toggleSignup">signup</span>
-                    <signup
-                        @authStart="showLoader"
-                        @authEnd="hideLoader"
-                        v-show="activeForm == 'signup'"
-                        ></signup>
-                </div>
-                <div v-show="!loggedOut" class="flex-col flex-center small-gap">
-                    <user-header :user="user"></user-header>
-                    <span class="modal-menu-option">settings</span>
-                    <span class="modal-menu-option">new game</span>
-                    <span @click="logout" class="modal-menu-option">logout</span>
-                </div>
-
-                <div v-show="loading" class="mau-menu-loading-wrap">
-                    <div class="dark-background"></div>
-                    <img src="./images/gears.svg" width="150" height="150" alt="rotating loading icon"/>
-                </div>
+        <script type="text/x-template" id="mau-settings-component">
+            <div class="modal-form-wrap">
+                <form class="flex-col col-center small-gap">
+                    <div class="flex-row small-gap">
+                        <div class="flex-row flex-center small-gap">
+                            <div class="flex-col flex-center">
+                                <p class="text-center green"><b>Dark Theme</b></p>
+                                <label>off</label>
+                            </div>
+                            <input type="checkbox" name="darkTheme"/>
+                        </div>
+                    </div>
+                </form>
             </div>
         </script>
 
@@ -208,6 +199,52 @@
                 </div>
 
             </form>
+        </script>
+
+        <script type="text/x-template" id="mau-menu-component">
+            <div>
+                <div v-show="loggedOut" class="flex-col flex-center small-gap">
+                    <span class="modal-menu-option"
+                        @click="toggleLogin"
+                        >login</span>
+                    <login
+                        @authStart="showLoader"
+                        @authEnd="hideLoader"
+                        @loggedIn="loggedIn"
+                        v-show="activeForm == 'login'"
+                        ></login>
+
+                    <span class="modal-menu-option"
+                        @click="toggleSignup"
+                        >signup</span>
+                    <signup
+                        @authStart="showLoader"
+                        @authEnd="hideLoader"
+                        v-show="activeForm == 'signup'"
+                        ></signup>
+                </div>
+
+                <div v-show="!loggedOut" class="flex-col flex-center small-gap">
+                    <user-header :user="user"></user-header>
+
+                    <span class="modal-menu-option"
+                        @click="toggleSettings"
+                        >settings</span>
+                    <settings v-show="activeForm == 'settings'"></settings>
+
+                    <span class="modal-menu-option"
+                        @click="toggleNewGame"
+                        >new game</span>
+                    <new-game v-show="activeForm == 'newGame'"></new-game>
+
+                    <span @click="logout" class="modal-menu-option">logout</span>
+                </div>
+
+                <div v-show="loading" class="mau-menu-loading-wrap">
+                    <div class="dark-background"></div>
+                    <img src="./images/gears.svg" width="150" height="150" alt="rotating loading icon"/>
+                </div>
+            </div>
         </script>
 
         <script type="text/x-template" id="mau-modal-view-component">

@@ -1,9 +1,3 @@
-let newGame = {
-    template: "#mau-new-game-component",
-    props: []
-}
-
-
 let login = {
     template: "#mau-login-component",
     props: [],
@@ -112,6 +106,18 @@ let userHeader = {
 }
 
 
+let settings = {
+    template: "#mau-settings-component",
+    props: []
+}
+
+
+let newGame = {
+    template: "#mau-new-game-component",
+    props: []
+}
+
+
 let menu = {
     template: "#mau-menu-component",
     props: ["user"],
@@ -124,7 +130,9 @@ let menu = {
     components: {
         "login": login,
         "signup": signup,
-        "user-header": userHeader
+        "user-header": userHeader,
+        "settings": settings,
+        "new-game": newGame
     },
     methods: {
         toggleLogin: function() {
@@ -132,6 +140,12 @@ let menu = {
         },
         toggleSignup: function() {
             this.activeForm = (this.activeForm == "signup") ? null : "signup";
+        },
+        toggleSettings: function() {
+            this.activeForm = (this.activeForm == "settings") ? null : "settings";
+        },
+        toggleNewGame: function() {
+            this.activeForm = (this.activeForm == "newGame") ? null : "newGame";
         },
         showLoader: function() {
             this.loading = true;
