@@ -22,15 +22,13 @@ let login = {
                 password: this.password
             };
 
-            console.log(window.location.host);
             const loginReq = fetch("https://mau-rest.herokuapp.com/auth/login",
             {
                 method: "POST",
                 mode: "cors",
                 headers: {
                     "Content-Type": "application/json",
-                    "Accept": "application/json",
-                    "X-client-host": window.location.host
+                    "Accept": "application/json"
                 },
                 body: JSON.stringify(req)
             });
