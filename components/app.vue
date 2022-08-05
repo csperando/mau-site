@@ -346,7 +346,7 @@ let dashboard = {
             })[0];
             uid = ("u" in uid) ? uid.u : "";
 
-            const u = fetch("https://mau-rest.herokuapp.com/auth/login" + uid);
+            const u = fetch("https://mau-rest.herokuapp.com/auth/login/" + uid);
             u.then((res) => {
                 return res.json();
 
