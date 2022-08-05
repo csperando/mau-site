@@ -36,13 +36,12 @@ let login = {
                 return res.json();
 
             }).then((res) => {
-                // console.log(res);
                 if(res.statusCode == 200) {
                     this.$emit("loggedIn", res.data);
                 }
 
             }).catch((err) => {
-                console.log(err);
+                console.error(err);
 
             }).finally(() => {
                 this.$emit("authEnd");
@@ -93,7 +92,7 @@ let signup = {
                 return res.json();
 
             }).then((res) => {
-                console.log(res);
+                // TODO: console.error("You never finished writing this.");
 
             }).catch((error) => {
                 console.error(error);
@@ -144,9 +143,7 @@ let menu = {
             this.$emit("loggedIn", user);
         },
         logout: function() {
-            // console.log(document.cookie);
             document.cookie = "u=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-            // console.log(document.cookie);
             window.location.reload();
         }
     },
@@ -356,11 +353,12 @@ let dashboard = {
                 }
 
             }).catch((error) => {
-                console.log(error);
+                console.error(error);
+
             });
 
         } catch(e) {
-            // console.log(e.message);
+            // console.error(e.message);
 
         }
 
