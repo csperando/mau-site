@@ -128,6 +128,7 @@
                     <user-header :user="user"></user-header>
                     <span class="modal-menu-option">settings</span>
                     <span class="modal-menu-option">new game</span>
+                    <span @click="logout" class="modal-menu-option">logout</span>
                 </div>
 
                 <div v-show="loading" class="mau-menu-loading-wrap">

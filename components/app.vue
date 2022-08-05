@@ -26,14 +26,17 @@ let login = {
             {
                 method: "POST",
                 mode: "cors",
-                headers: { "Accept": "application/json" },
-                // credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
                 body: JSON.stringify(req)
             });
             loginReq.then((res) => {
                 return res.json();
 
             }).then((res) => {
+                // console.log(res);
                 if(res.statusCode == 200) {
                     this.$emit("loggedIn", res.data);
                 }
@@ -139,6 +142,12 @@ let menu = {
         },
         loggedIn: function(user) {
             this.$emit("loggedIn", user);
+        },
+        logout: function() {
+            // console.log(document.cookie);
+            document.cookie = "u=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+            // console.log(document.cookie);
+            window.location.reload();
         }
     },
     computed: {
@@ -326,6 +335,36 @@ let dashboard = {
 
         });
 
+        // login user on page load using cookies
+        try {
+            let cookie = document.cookie;
+            let uid = cookie.split(";").map((el) => {
+                let keyValue = el.split("=");
+                if(keyValue[0] == "u") {
+                    return {"u": keyValue[1]};
+                }
+            })[0];
+            uid = ("u" in uid) ? uid.u : "";
+
+            // const u = fetch("https://mau-rest.herokuapp.com/auth/login" + uid);
+            const u = fetch("http://localhost:3000/auth/login/" + uid);
+            u.then((res) => {
+                return res.json();
+
+            }).then((res) => {
+                if(res.statusCode == 200) {
+                    this.user = res.data;
+                }
+
+            }).catch((error) => {
+                console.log(error);
+            });
+
+        } catch(e) {
+            // console.log(e.message);
+
+        }
+
     },
     methods: {
         toggleModal: function(payload) {
@@ -336,6 +375,7 @@ let dashboard = {
         },
         loggedIn: function(user) {
             this.user = user;
+            document.cookie = `u=${user.id};`;
         }
     }
 }
