@@ -22,6 +22,7 @@ let login = {
                 password: this.password
             };
 
+            console.log(window.location.host);
             const loginReq = fetch("https://mau-rest.herokuapp.com/auth/login",
             {
                 method: "POST",
