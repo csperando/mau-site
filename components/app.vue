@@ -30,6 +30,7 @@ let login = {
                     "Content-Type": "application/json",
                     "Accept": "application/json"
                 },
+                credentials: "include",
                 body: JSON.stringify(req)
             });
             loginReq.then((res) => {
