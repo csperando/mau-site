@@ -1,3 +1,16 @@
+.round-row-outer {
+    flex-basis: 30%;
+}
+
+.round-row-inner {
+    flex-basis: 40%;
+}
+
+.delete-round:hover {
+    cursor: pointer;
+    filter: brightness(0.5);
+}
+
 .new-round-btn {
     height: 40px;
     border-radius: 15px;

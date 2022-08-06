@@ -112,9 +112,98 @@ let settings = {
 }
 
 
+let newRound = {
+    template: "#mau-round-component",
+    props: ["round", "index"],
+    methods: {
+        deleteRound: function() {
+            this.$emit("deleteRound", this.round);
+        }
+    }
+}
+
+
 let newGame = {
     template: "#mau-new-game-component",
-    props: []
+    props: [],
+    data: function() {
+        return {
+            "game": {
+                winner: {"name": ""},
+                loser: {"name": ""},
+                overall: [null, null],
+                "rounds": []
+            }
+        }
+    },
+    components: {
+        "new-round": newRound
+    },
+    methods: {
+        newRound: function() {
+            let prevIndex = this.game.rounds.length;
+            this.game.rounds.push({
+                winner: {"name": ""},
+                loser: {"name": ""},
+                points: null
+            });
+        },
+        deleteRound: function(r) {
+            let index = this.game.rounds.indexOf(r);
+            let rounds = this.game.rounds.splice(index, 1);
+        },
+        submitGame: function() {
+            this.$emit("loadingStart");
+
+            let body = this.game;
+            body.players = [this.game.winner, this.game.loser];
+            let overall = parseInt(body.overall[0]) + parseInt(body.overall[1]);
+            let roundTotal = 0;
+            for(var r of body.rounds) {
+                roundTotal += parseInt(r.points);
+            }
+
+            if(overall != roundTotal) {
+                console.error(`point error: round total ${roundTotal} does not equal overall total ${overall}`);
+                this.$emit("loadingEnd");
+                return;
+            }
+
+            const req = fetch("https://mau-rest.herokuapp.com/mau", {
+                method: "POST",
+                mode: "cors",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify(body)
+            });
+            req.then((res) => {
+                return res.json();
+
+            }).then((res) => {
+                if(res.statusCode == 200) {
+                    console.log("successfully posted new game");
+                }
+
+            }).catch((error) => {
+                console.error(error);
+
+            }).finally(() => {
+                this.$emit("loadingEnd");
+                this.reset();
+
+            });
+        },
+        reset: function() {
+            this.game = {
+                winner: {"name": ""},
+                loser: {"name": ""},
+                overall: [null, null],
+                "rounds": []
+            };
+        }
+    }
 }
 
 

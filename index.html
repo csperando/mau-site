@@ -129,72 +129,90 @@
             </div>
         </script>
 
-        <script type="text/x-template" id="mau-new-game-component">
-            <form action="" method="POST">
-                <p class="text-center"><b>Add a New Game!</b></p>
+        <script type="text/x-template" id="mau-round-component">
+            <div class="flex-row row-space-between">
 
+                <div class="round-row-outer flex-row flex-center">
+                    <span class="green"><b>Round {{ index }}</b></span>
+                </div>
+
+                <div class="round-row-inner">
+                    <div class="flex-col">
+                        <div class="flex-col">
+                            <label class="text-center" for="round-winner">Winner</label>
+                            <input type="text" v-model="round.winner.name"/>
+                        </div>
+
+                        <div class="flex-col">
+                            <label class="text-center" for="round-loser">Loser</label>
+                            <input type="text" v-model="round.loser.name"/>
+                        </div>
+
+                        <div class="flex-col">
+                            <label class="text-center" for="round-1-points">Points</label>
+                            <div class="flex-row flex-center">
+                                <input type="number" v-model="round.points"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div @click="deleteRound" class="round-row-outer flex-row flex-center delete-round">
+                    <img src="/images/icons/trash.svg" alt="trashcan icon - delete round" height="30" width="30"/>
+                </div>
+            </div>
+        </script>
+
+        <script type="text/x-template" id="mau-new-game-component">
+            <form @submit.prevent="submitGame">
+                <p class="text-center"><b>Add a New Game!</b></p>
 
                 <div class="space-around">
                     <p class="text-center"><b>Overall</b></p>
                     <div class="two-col">
                         <div class="flex-col">
                             <label for="winner">Winner</label>
-                            <input type="text"/>
+                            <input v-model="game.winner.name" required type="text" name="overall-winner"/>
                         </div>
                         <div class="flex-col">
                             <label for="loser">Loser</label>
-                            <input type="text"/>
+                            <input v-model="game.loser.name" required type="text" name="overall-loser"/>
                         </div>
                     </div>
 
                     <div class="flex-col">
                         <label class="text-center" for="score">Score</label>
                         <div class="flex-row flex-center">
-                            <input type="number"/>
+                            <input v-model="game.overall[0]" required type="number" name="overall-score-a"/>
                             <span>&nbsp;&nbsp;<em>to</em>&nbsp;&nbsp;</span>
-                            <input type="number"/>
+                            <input v-model="game.overall[1]" required type="number" name="overall-score-b"/>
                         </div>
                     </div>
                 </div>
-
 
                 <div class="space-around">
                     <p class="text-center"><b>Rounds</b></p>
-
-                    <p>Round 1</p>
-                    <div class="two-col">
-                        <div class="flex-col">
-                            <label for="round-1-winner">Winner</label>
-                            <input type="text"/>
-                        </div>
-                        <div class="flex-col">
-                            <label for="round-1-loser">Loser</label>
-                            <input type="text"/>
-                        </div>
-                    </div>
-
-                    <div class="flex-col">
-                        <label class="text-center" for="round-1-points">Points</label>
-                        <div class="flex-row flex-center">
-                            <input type="number"/>
-                        </div>
-                    </div>
+                    <new-round
+                        v-for="(round, index) in game.rounds"
+                        :round="round"
+                        :key="round.id"
+                        :index="game.rounds.indexOf(round) + 1"
+                        @deleteRound="deleteRound"
+                        ></new-round>
                 </div>
-
 
                 <div class="space-around">
                     <div class="flex-row flex-center">
-                        <div class="new-round-btn flex-row flex-center small-gap">
+                        <div @click="newRound" class="new-round-btn flex-row flex-center small-gap">
                             <img src="./images/icons/plus.svg" alt="plus sign" width="16" height="16"/>
                             <span>add round</span>
                         </div>
                     </div>
                 </div>
 
-
                 <div class="space-around">
                     <div class="flex-row flex-center">
-                        <input type="button" value="Submit"/>
+                        <input type="submit" value="Submit"/>
                     </div>
                 </div>
 
@@ -235,7 +253,11 @@
                     <span class="modal-menu-option"
                         @click="toggleNewGame"
                         >new game</span>
-                    <new-game v-show="activeForm == 'newGame'"></new-game>
+                    <new-game
+                        @loadingStart="showLoader"
+                        @loadingEnd="hideLoader"
+                        v-show="activeForm == 'newGame'"
+                        ></new-game>
 
                     <span @click="logout" class="modal-menu-option">logout</span>
                 </div>
