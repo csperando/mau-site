@@ -171,7 +171,7 @@ let newGame = {
             }
 
             if(overall != roundTotal) {
-                console.error(`point error: round total ${roundTotal} does not equal overall total ${overall}`);
+                alert(`point error: round total ${roundTotal} does not equal overall total ${overall}`);
                 this.$emit("loadingEnd");
                 return;
             }
@@ -192,7 +192,7 @@ let newGame = {
                 if(res.statusCode == 200) {
                     console.log("successfully posted new game");
                 } else {
-                    alert(res.message);
+                    alert("error: " + res.message);
                 }
 
             }).catch((error) => {
