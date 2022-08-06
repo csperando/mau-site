@@ -67,31 +67,31 @@
                     <div class="flex-row small-gap">
                         <div class="flex-col">
                             <label>First name:</label>
-                            <input v-model="firstName" type="text" name="firstName"/>
+                            <input v-model="firstName" type="text" name="firstName" required/>
                         </div>
                         <div class="flex-col">
                             <label>Last name:</label>
-                            <input v-model="lastName" type="text" name="lastName"/>
+                            <input v-model="lastName" type="text" name="lastName" required/>
                         </div>
                     </div>
                     <div class="flex-row small-gap">
                         <div class="flex-col">
                             <label>Email:</label>
-                            <input v-model="email" type="text" name="email"/>
+                            <input v-model="email" type="text" name="email" required/>
                         </div>
                         <div class="flex-col">
                             <label>Username:</label>
-                            <input v-model="username" type="text" name="username"/>
+                            <input v-model="username" type="text" name="username" required/>
                         </div>
                     </div>
                     <div class="flex-row small-gap">
                         <div class="flex-col">
                             <label>Password:</label>
-                            <input v-model="password" type="password" name="password"/>
+                            <input v-model="password" type="password" name="password" required/>
                         </div>
                         <div class="flex-col">
                             <label>Confirm:</label>
-                            <input v-model="confirm" type="password" name="confirm"/>
+                            <input v-model="confirm" type="password" name="confirm" required/>
                         </div>
                     </div>
                     <div class="flex-row flex-center">
@@ -131,32 +131,29 @@
 
         <script type="text/x-template" id="mau-round-component">
             <div class="flex-row row-space-between">
-
                 <div class="round-row-outer flex-row flex-center">
                     <span class="green"><b>Round {{ index }}</b></span>
                 </div>
-
                 <div class="round-row-inner">
                     <div class="flex-col">
                         <div class="flex-col">
                             <label class="text-center" for="round-winner">Winner</label>
-                            <input type="text" v-model="round.winner.name"/>
+                            <input type="text" required v-model="round.winner.name"/>
                         </div>
 
                         <div class="flex-col">
                             <label class="text-center" for="round-loser">Loser</label>
-                            <input type="text" v-model="round.loser.name"/>
+                            <input type="text" required v-model="round.loser.name"/>
                         </div>
 
                         <div class="flex-col">
                             <label class="text-center" for="round-1-points">Points</label>
                             <div class="flex-row flex-center">
-                                <input type="number" v-model="round.points"/>
+                                <input type="number" required v-model="round.points"/>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <div @click="deleteRound" class="round-row-outer flex-row flex-center delete-round">
                     <img src="./images/icons/trash.svg" alt="trashcan icon - delete round" height="30" width="30"/>
                 </div>
@@ -250,7 +247,9 @@
                         >settings</span>
                     <settings v-show="activeForm == 'settings'"></settings>
 
-                    <span class="modal-menu-option"
+                    <span
+                        v-if="isAdmin"
+                        class="modal-menu-option"
                         @click="toggleNewGame"
                         >new game</span>
                     <new-game

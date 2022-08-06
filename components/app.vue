@@ -32,6 +32,8 @@ let login = {
             }).then((res) => {
                 if(res.statusCode == 200) {
                     this.$emit("loggedIn", res.data);
+                } else {
+                    alert(res.message);
                 }
 
             }).catch((err) => {
@@ -71,6 +73,11 @@ let signup = {
                 password: this.password,
                 confirm: this.confirm
             }
+            if(req.password != req.confirm) {
+                alert("passwords do not match")
+                this.$emit("authEnd");
+                return;
+            }
 
             const signupReq = fetch("https://mau-rest.herokuapp.com/auth/signup",
             {
@@ -86,7 +93,7 @@ let signup = {
                 return res.json();
 
             }).then((res) => {
-                // TODO: console.error("You never finished writing this.");
+                alert(res.message);
 
             }).catch((error) => {
                 console.error(error);
@@ -184,6 +191,8 @@ let newGame = {
             }).then((res) => {
                 if(res.statusCode == 200) {
                     console.log("successfully posted new game");
+                } else {
+                    alert(res.message);
                 }
 
             }).catch((error) => {
@@ -253,6 +262,13 @@ let menu = {
     computed: {
         loggedOut: function() {
             return this.user == null;
+        },
+        isAdmin: function() {
+            try {
+                return this.user.roles == 'write';
+            } catch(e) {
+                return false;
+            }
         }
     }
 }
