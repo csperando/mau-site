@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    	<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="Offline page | play tic-tac-toe">
+		<meta name="theme-color" content="#ffffff">
+		<title>Mau - Offline :(</title>
+		<link rel="apple-touch-icon" sizes="180x180" href="./images/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="./images/favicon-16x16.png">
+		<link rel="manifest" href="site.webmanifest">
+	</head>
+
+	<body>
+
+		<style>
+
+			* {
+				position: relative;
+				margin: 0;
+				padding: 0;
+			}
+
+			-webkit-scrollbar {
+				display: none;
+			}
+
+			section {
+				margin: min(10vh, 10vw) 0;
+			}
+
+			a {
+				text-decoration: none;
+				color: inherit;
+			}
+
+			/* Styles for navbar */
+			.brand {
+				display: grid;
+				float: left;
+				height: 60%;
+				top: 20%;
+				grid-template-columns: 60px auto;
+				padding-left: 20px;
+			}
+
+			.brand-title {
+				margin: auto;
+			}
+
+			nav {
+				top: 0;
+				width: 100%;
+				left: 0;
+				margin: 0;
+				padding: 0;
+				height: 100px;
+			}
+
+			.nav-container {
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background-color: #E6EEF0;
+			}
+
+			.menu {
+				display: grid;
+				float: right;
+				height: 60%;
+				top: 20%;
+				width: auto;
+				padding-right: 20px;
+			}
+
+			.menu-expanded {
+				margin: auto;
+				display: grid;
+				grid-template-columns: auto auto auto;
+			}
+
+			.menu-expanded-item {
+				padding: 20px;
+			}
+
+			.svg-menu {
+				border-radius: 15px;
+				box-sizing: border-box;
+				padding: 5px;
+				display: none;
+			}
+
+			.svg-menu:hover {
+				background-color: white;
+				cursor: pointer;
+			}
+
+			.menu-collapse {
+				position: absolute;
+				top: 100%;
+				left: 0;
+				width: 100%;
+				height: auto;
+				display: none;
+				text-shadow: 0 0 1px black;
+				z-index: 99;
+			}
+
+			.menu-collapse-item {
+				margin: 5px 0;
+				padding: 10px 0;
+				text-align: center;
+			}
+
+			.menu-collapse-item:hover {
+				background-color: white;
+				font-weight: bold;
+				cursor: pointer;
+			}
+
+			.title-center {
+				margin: 5vh auto;
+				text-align: center;
+			}
+
+			.ttt {
+				position: relative;
+				display: grid;
+				grid-template: 1fr / 1fr auto 1fr;
+			}
+
+			.ttt-board {
+				position: relative;
+				width: min(62vh, 62vw);
+				height: min(62vh, 62vw);
+				display: grid;
+				grid-template: repeat(3, min(20vh, 20vw)) / repeat(3, min(20vh, 20vw));
+				grid-gap: min(1vh, 1vw);
+				background-color: black;
+			}
+
+			.ttt-square {
+				position: relative;
+				width: 100%;
+				height: 100%;
+				background-color: white;
+			}
+
+			.open:hover {
+				background-color: #E4FFFF;
+			}
+
+			.ttt-svg{
+				position: relative;
+			}
+
+			.o {
+				left: 20%;
+				top: 20%;
+			}
+
+			.gameover-wrap {
+				grid-area: 1 / 2 / span 1 / span 1;
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				display: none;
+			}
+
+			.gameover-background {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				background-color: yellow;
+				opacity: 0.7;
+				border-radius: 5px;
+				box-sizing: border-box;
+			}
+
+			.gameover-msg {
+				position: relative;
+				width: 90%;
+				height: 60%;
+				top: 20%;
+				left: 5%;
+				background-color: white;
+				border-radius: 20%;
+				display: grid;
+				grid-template-rows: auto;
+				text-align: center;
+			    align-items: center;
+			    justify-items: center;
+			    justify-content: center;
+			    align-content: stretch;
+			}
+
+			p#gameover-winner {
+				font-weight: bold;
+				font-size: 2em;
+			}
+
+			/* Responsive Styles */
+		    @media screen and (max-width: 768px) {
+
+
+		    }
+
+		</style>
+
+		<nav>
+		    <div class="nav-container" id="nav-background">
+				<div class="brand">
+						<a href="." aria-label="navbar brand icon link back to homepage">
+				            <svg width="100%" height="100%" class="svg-brand" id="brand-svg" viewbox="0 0 16 16" preserveAspectRatio="xMidYMid meet">
+							  <g>
+								  <path class="svg-brand-b" d="M10.706 3.294A12.545 12.545 0 0 0 8 3C5.259 3 2.723 3.882.663 5.379a.485.485 0 0 0-.048.736.518.518 0 0 0 .668.05A11.448 11.448 0 0 1 8 4c.63 0 1.249.05 1.852.148l.854-.854zM8 6c-1.905 0-3.68.56-5.166 1.526a.48.48 0 0 0-.063.745.525.525 0 0 0 .652.065 8.448 8.448 0 0 1 3.51-1.27L8 6zm2.596 1.404.785-.785c.63.24 1.227.545 1.785.907a.482.482 0 0 1 .063.745.525.525 0 0 1-.652.065 8.462 8.462 0 0 0-1.98-.932zM8 10l.933-.933a6.455 6.455 0 0 1 2.013.637c.285.145.326.524.1.75l-.015.015a.532.532 0 0 1-.611.09A5.478 5.478 0 0 0 8 10zm4.905-4.905.747-.747c.59.3 1.153.645 1.685 1.03a.485.485 0 0 1 .047.737.518.518 0 0 1-.668.05 11.493 11.493 0 0 0-1.811-1.07zM9.02 11.78c.238.14.236.464.04.66l-.707.706a.5.5 0 0 1-.707 0l-.707-.707c-.195-.195-.197-.518.04-.66A1.99 1.99 0 0 1 8 11.5c.374 0 .723.102 1.021.28zm4.355-9.905a.53.53 0 0 1 .75.75l-10.75 10.75a.53.53 0 0 1-.75-.75l10.75-10.75z"/>
+							  </g>
+							</svg>
+						</a>
+		        </div> <!-- end brand -->
+
+		        <div class="menu">
+		            <div class="menu-expanded">
+		                <p class="menu-expanded-item" id="menu-text"><a href=".">REFRESH</a></p>
+		            </div>
+		        </div> <!-- end menu -->
+
+		    </div> <!-- end container -->
+		</nav>
+
+
+
+		<h2 class="title-center">Not connected. How about a game of tic-tac-toe? </h2>
+
+		<section class="ttt">
+
+			<div></div>
+
+			<div class="ttt-board" id="game-board">
+				<!-- id values form magic square -->
+				<div class="ttt-square open" id="magic-2"></div>
+				<div class="ttt-square open" id="magic-7"></div>
+				<div class="ttt-square open" id="magic-6"></div>
+
+				<div class="ttt-square open" id="magic-9"></div>
+				<div class="ttt-square open" id="magic-5"></div>
+				<div class="ttt-square open" id="magic-1"></div>
+
+				<div class="ttt-square open" id="magic-4"></div>
+				<div class="ttt-square open" id="magic-3"></div>
+				<div class="ttt-square open" id="magic-8"></div>
+			</div>
+
+			<div></div>
+
+			<div class="gameover-wrap" id="gameover">
+				<div class="gameover-background"></div>
+				<div class="gameover-msg">
+					<p id="gameover-winner">It's a Tie!</p>
+					<p class="gameover-caption">Thanks for playing!</p>
+					<div class="gameover-options">
+						<button onclick="restart()">play again</button>
+						<!-- <button onclick="reload()">check internet</button> -->
+					</div>
+				</div>
+			</div>
+
+		</section>
+
+		<script>
+
+			// global color styles/themes
+			var randColor1 = Math.random()*360;
+			var randColor2 = randColor1 + 120;
+			var randColor3 = randColor2 + 120;
+
+			// primary text/icon colors light/dark
+			var textLight = `hsl(${randColor1}, 100%, 80%)`;
+			var textDark = `hsl(${randColor1}, 100%, 50%)`;
+
+			// details/accents
+			var detailLight = `hsl(${randColor2}, 55%, 80%)`;
+			// var detailDark = `hsl(${randColor2}, 55%, 20%)`;
+
+			// background
+			var bgLight = `hsl(${randColor3}, 55%, 60%)`;
+			var bgDark = `hsl(${randColor3}, 55%, 20%)`;
+
+			// console.log("test");
+			var color1 = `rgb(15, 78, 252)`;
+			var color2 = `rgb(252, 47, 15)`;
+			var oHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="60%" height="60%" fill="' + color1 + '" class="o ttt-svg" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/></svg>';
+			var xHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="' + color2 + '" class="x ttt-svg" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg>';
+			var turn = 0;
+			var gameover = false;
+
+			window.addEventListener("load", () => {
+
+				document.getElementById("brand-svg").style.fill = textLight;
+				document.getElementById("nav-background").style.backgroundColor = bgDark;
+				document.getElementById("menu-text").style.color = textLight;
+
+			}); // end load
+
+			var squares = document.getElementsByClassName("ttt-square");
+			squares = Array.prototype.slice.call( squares );
+
+			// add listener for user input
+			for(var i = 0; i < squares.length; i++) {
+				var el = squares[i];
+
+				// on click, update selection if valid
+				// hide board from user until ai moves
+				el.addEventListener("click", function() {
+
+					// make sure clicked square is available
+					if(this.innerHTML == "") {
+						// update inner content
+						this.innerHTML = oHTML;
+
+						// update turn and check if gameover
+						turn++;
+						// console.log(turn);
+						gameover = checkWin();
+
+						// computer's turn
+						if(gameover) {
+							document.getElementById("gameover-winner").innerHTML = "You Won!";
+							document.getElementById("gameover").style.display = "block";
+							turn = 0;
+						} else if (turn == 9) {
+							// tie
+							turn = 0;
+							document.getElementById("gameover").style.display = "block";
+						} else {
+							ai();
+						}
+
+					// invalid click: do nothing
+					} else {
+						// console.log("invalid selection");
+					}
+				});
+			}; // end for loop for user input
+
+
+
+			// odd number, ai turn
+			function ai() {
+
+				// default select first available move
+				for(i = 0; i < squares.length; i++) {
+					var el = squares[i];
+					if(el.innerHTML == "") {
+						el.innerHTML = xHTML;
+						turn++;
+						break;
+					}
+				}
+
+				var gameover = checkWin();
+
+				// you lose
+				if(gameover) {
+					document.getElementById("gameover-winner").innerHTML = "You Lost :(";
+					document.getElementById("gameover").style.display = "block";
+					turn = 0;
+				}
+
+			} // end function ai
+
+			function checkWin() {
+				var sumX = 0;
+				var sumO = 0;
+
+				// check horizontal lines for x and o
+				for(j=0; j<7; j=j+3) {
+					for(i=0; i<3; i++) {
+						sumX = squares[i+j].innerHTML.includes('class="x') ? sumX+1 : sumX;
+						sumO = squares[i+j].innerHTML.includes('class="o') ? sumO + 1 : sumO;
+					}
+
+					if (sumX == 3 || sumO == 3) {
+						// console.log(`Victory: row ${j}`);
+						return true;
+					} else {
+						sumX = sumO = 0;
+					}
+				}
+
+				// check vertical lines
+				sumX = sumO = 0;
+				for(j=0; j<3; j++) {
+					for(i=j; i<9; i=i+3) {
+						sumX = squares[i].innerHTML.includes('class="x') ? sumX+1 : sumX;
+						sumO = squares[i].innerHTML.includes('class="o') ? sumO + 1 : sumO;
+					}
+
+					if (sumX == 3 || sumO == 3) {
+						// console.log(`Victory: column ${j}`);
+						return true;
+					} else {
+						sumX = sumO = 0;
+					}
+				}
+
+
+				// check diagonals
+				for(i=0; i<9; i=i+4) {
+					sumX = squares[i].innerHTML.includes('class="x') ? sumX+1 : sumX;
+					sumO = squares[i].innerHTML.includes('class="o') ? sumO + 1 : sumO;
+				}
+				if (sumX == 3 || sumO == 3) {
+					// console.log(`Victory: diagonal`);
+					return true;
+				} else {
+					sumX = sumO = 0;
+				}
+
+				for(i=2; i<7; i=i+2) {
+					sumX = squares[i].innerHTML.includes('class="x') ? sumX+1 : sumX;
+					sumO = squares[i].innerHTML.includes('class="o') ? sumO + 1 : sumO;
+				}
+				if (sumX == 3 || sumO == 3) {
+					// console.log(`Victory: diagonal`);
+					return true;
+				} else {
+					sumX = sumO = 0;
+				}
+
+				return false;
+			} // end function checkWin
+
+
+
+			function reload() {
+				location.reload();
+			}
+
+			function restart() {
+				document.getElementById("gameover-winner").innerHTML = "It's a Tie!";
+				document.getElementById("gameover").style.display = "none";
+
+				for(i=0; i<9; i++) {
+					squares[i].innerHTML = "";
+				}
+			}
+
+		</script>
+	</body>
+</html>
