@@ -1,3 +1,7 @@
+form {
+    overflow-x: visible;
+}
+
 input {
     font-size: 16px;
 }

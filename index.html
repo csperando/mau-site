@@ -48,6 +48,14 @@
             <p class="title space-around text-shadow green"><b>About Mau</b></p>
         </section>
 
+        <section class="full-screen" id="rules-mau">
+            <p class="title space-around text-shadow green"><b>Rules</b></p>
+        </section>
+
+        <section class="full-screen" id="points-mau">
+            <p class="title space-around text-shadow green"><b>Points</b></p>
+        </section>
+
 
         <script type="text/x-template" id="mau-login-component">
             <div class="modal-form-wrap">
@@ -111,7 +119,7 @@
 
         <script type="text/x-template" id="mau-user-header-component">
             <div v-if="user">
-                <div class="flex-row flex-center space-around">
+                <div class="flex-row flex-center space-around overflow-show">
                     <img class="tilted" src="./images/6Spades.svg" alt="six of spades playing card" height="100" width="100"/>
                     <div class="flex-col small-gap">
                         <p class="text-center title">{{user.username}}</p>
@@ -174,7 +182,7 @@
 
                 <div class="space-around">
                     <p class="text-center"><b>Overall</b></p>
-                    <div class="two-col m-flex-col m-flex-center">
+                    <div class="two-col m-flex-col m-flex-center space-above">
                         <div class="flex-col">
                             <label class="m-text-center" for="winner">Winner</label>
                             <input v-model="game.winner.name" required type="text" name="overall-winner"/>
@@ -195,7 +203,7 @@
                     </div>
                 </div>
 
-                <div class="space-around">
+                <div class="space-above">
                     <p class="text-center"><b>Rounds</b></p>
                     <new-round
                         v-for="(round, index) in game.rounds"
@@ -206,7 +214,7 @@
                         ></new-round>
                 </div>
 
-                <div class="space-around">
+                <div class="space-above">
                     <div class="flex-row flex-center">
                         <div @click="newRound" class="new-round-btn flex-row flex-center small-gap">
                             <img src="./images/icons/plus-green.svg" alt="plus sign" width="16" height="16"/>
@@ -215,7 +223,7 @@
                     </div>
                 </div>
 
-                <div class="space-around">
+                <div class="space-above">
                     <div class="flex-row flex-center">
                         <button class="std-btn">Submit</button>
                     </div>
@@ -320,7 +328,7 @@
 
         <script type="text/x-template" id="mau-stats-component">
             <div>
-                <div class="stat-names-wrap">
+                <div v-if="!loadingStats" class="stat-names-wrap">
                     <span class="stat-name-left green m-stat-name">Ty</span>
                     <span class="stat-name-right purple m-stat-name">Coleman</span>
                 </div>
