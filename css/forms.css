@@ -1,3 +1,7 @@
+input {
+    font-size: 16px;
+}
+
 .modal-menu-option {
     color: blue;
     font-weight: bold;
