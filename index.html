@@ -44,7 +44,7 @@
         <script type="text/x-template" id="mau-login-component">
             <div class="modal-form-wrap">
                 <form @submit.prevent="loginUser" class="flex-col col-center small-gap">
-                    <div class="flex-row small-gap">
+                    <div class="flex-row small-gap m-flex-col m-flex-center">
                         <div class="flex-col">
                             <label>Username:</label>
                             <input v-model="username" type="text" name="username"/>
@@ -64,7 +64,7 @@
         <script type="text/x-template" id="mau-signup-component">
             <div class="modal-form-wrap">
                 <form @submit.prevent="signupUser" class="flex-col col-center small-gap">
-                    <div class="flex-row small-gap">
+                    <div class="flex-row small-gap m-flex-col m-flex-center">
                         <div class="flex-col">
                             <label>First name:</label>
                             <input v-model="firstName" type="text" name="firstName" required/>
@@ -74,7 +74,7 @@
                             <input v-model="lastName" type="text" name="lastName" required/>
                         </div>
                     </div>
-                    <div class="flex-row small-gap">
+                    <div class="flex-row small-gap m-flex-col m-flex-center">
                         <div class="flex-col">
                             <label>Email:</label>
                             <input v-model="email" type="text" name="email" required/>
@@ -84,7 +84,7 @@
                             <input v-model="username" type="text" name="username" required/>
                         </div>
                     </div>
-                    <div class="flex-row small-gap">
+                    <div class="flex-row small-gap m-flex-col m-flex-center">
                         <div class="flex-col">
                             <label>Password:</label>
                             <input v-model="password" type="password" name="password" required/>
@@ -130,7 +130,7 @@
         </script>
 
         <script type="text/x-template" id="mau-round-component">
-            <div class="flex-row row-space-between">
+            <div class="space-above flex-row row-space-between m-flex-col m-flex-center m-small-gap">
                 <div class="round-row-outer flex-row flex-center">
                     <span class="green"><b>Round {{ index }}</b></span>
                 </div>
@@ -154,7 +154,7 @@
                         </div>
                     </div>
                 </div>
-                <div @click="deleteRound" class="round-row-outer flex-row flex-center delete-round">
+                <div @click="deleteRound" class="round-row-outer flex-row flex-center delete-round m-delete">
                     <img src="./images/icons/trash.svg" alt="trashcan icon - delete round" height="30" width="30"/>
                 </div>
             </div>
@@ -166,20 +166,20 @@
 
                 <div class="space-around">
                     <p class="text-center"><b>Overall</b></p>
-                    <div class="two-col">
+                    <div class="two-col m-flex-col m-flex-center">
                         <div class="flex-col">
-                            <label for="winner">Winner</label>
+                            <label class="m-text-center" for="winner">Winner</label>
                             <input v-model="game.winner.name" required type="text" name="overall-winner"/>
                         </div>
                         <div class="flex-col">
-                            <label for="loser">Loser</label>
+                            <label class="m-text-center" for="loser">Loser</label>
                             <input v-model="game.loser.name" required type="text" name="overall-loser"/>
                         </div>
                     </div>
 
-                    <div class="flex-col">
+                    <div class="flex-col space-above">
                         <label class="text-center" for="score">Score</label>
-                        <div class="flex-row flex-center">
+                        <div class="flex-row flex-center m-flex-col">
                             <input v-model="game.overall[0]" required type="number" name="overall-score-a"/>
                             <span>&nbsp;&nbsp;<em>to</em>&nbsp;&nbsp;</span>
                             <input v-model="game.overall[1]" required type="number" name="overall-score-b"/>
@@ -201,7 +201,7 @@
                 <div class="space-around">
                     <div class="flex-row flex-center">
                         <div @click="newRound" class="new-round-btn flex-row flex-center small-gap">
-                            <img src="./images/icons/plus.svg" alt="plus sign" width="16" height="16"/>
+                            <img src="./images/icons/plus-green.svg" alt="plus sign" width="16" height="16"/>
                             <span>add round</span>
                         </div>
                     </div>
@@ -209,7 +209,7 @@
 
                 <div class="space-around">
                     <div class="flex-row flex-center">
-                        <input type="submit" value="Submit"/>
+                        <button class="std-btn">Submit</button>
                     </div>
                 </div>
 
