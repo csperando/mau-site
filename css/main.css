@@ -7,12 +7,18 @@
     overflow-x: hidden;
 }
 
+.full-screen {
+    min-width: 100vw;
+    min-height: 100vh;
+}
+
 .background {
     position: absolute;
     top: 0;
     width: 100vw;
-    height: 100vh;
+    height: 100%;
     background: url("../images/poker.svg");
+    background-repeat: repeat;
     opacity: 0.1;
 }
 
@@ -24,6 +30,10 @@
     text-align: right;
 }
 
+.text-shadow {
+    text-shadow: 0.7px 0.7px 1px black;
+}
+
 .title {
     font-weight: bold;
     font-size: 24px;
@@ -31,6 +41,10 @@
 
 .green {
     color: green !important;
+}
+
+.purple {
+    color: purple !important;
 }
 
 .two-col {

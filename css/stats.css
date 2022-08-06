@@ -19,3 +19,34 @@
     min-width: 50px;
     text-align: left;
 }
+
+.stat-names-wrap {
+    position: absolute;
+    top: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    gap: 75px;
+    font-weight: bold;
+    font-size: 36px;
+    overflow: visible;
+}
+
+.stat-name-left {
+    flex-basis: 40%;
+    text-align: right;
+    transform: rotate(-5deg);
+}
+
+.stat-name-right {
+    flex-basis: 40%;
+    text-align: left;
+    transform: rotate(5deg);
+}
+
+@media screen and (max-width: 768px) {
+    .m-stat-name {
+        font-size: 24px;
+    }
+}

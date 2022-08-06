@@ -40,9 +40,13 @@
     <body>
         <div class="background"></div>
 
-        <div id="app">
+        <div class="full-screen" id="app">
             <dashboard></dashboard>
         </div>
+
+        <section class="full-screen" id="about-mau">
+            <p class="title space-around text-shadow green"><b>About Mau</b></p>
+        </section>
 
 
         <script type="text/x-template" id="mau-login-component">
@@ -316,6 +320,10 @@
 
         <script type="text/x-template" id="mau-stats-component">
             <div>
+                <div class="stat-names-wrap">
+                    <span class="stat-name-left green m-stat-name">Ty</span>
+                    <span class="stat-name-right purple m-stat-name">Coleman</span>
+                </div>
 
                 <div v-if="!loadingStats" class="mau-stats">
                     <div class="mau-stats-wins">
@@ -349,6 +357,7 @@
                             <span class="mau-stat">{{stats.savage.Coleman}}</span>
                         </div>
                     </div>
+
                 </div> <!-- end mau-stats -->
 
                 <div v-else class="mau-stats mau-stats-loading">
