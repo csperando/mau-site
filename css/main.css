@@ -129,6 +129,10 @@
     transform: rotate(10deg);
 }
 
+.m-show {
+    display: none;
+}
+
 /* large */
 @media screen and (max-width: 992px) {
 
@@ -152,6 +156,14 @@
 
     .m-small-gap {
         gap: 20px;
+    }
+
+    .m-show {
+        display: inherit;
+    }
+
+    .m-hide {
+        display: none;
     }
 }
 

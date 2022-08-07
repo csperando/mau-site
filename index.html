@@ -75,7 +75,7 @@
                 <div class="light-background"></div>
                 <p>
                     <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    We play with a 56 card deck (4 jokers). Each player starts with <b>7</b> cards. The dealer is the loser of the last round. Once all cards are dealt, the top card of the deck is palced face up. Then each player
+                    We play with a <b>56</b> card deck (4 jokers). Each player starts with <b>7</b> cards. The dealer is the loser of the last round. Once all cards are dealt, the top card of the deck is palced face up. Then each player
                     takes turns playing a card that is either the same rank, same suit, or wild. Alternatively, you can draw a card from the top of the deck instead of playing a card whenever you
                     feel like it. You can only draw one card per turn, but if the card you draw is playable then you can play the card. However, if the card touches the other cards in your hand,
                     then you can no longer play it. If you accidentally knock over any cards, then you have to keep any card who's face you saw. When you have one card left you have to say "Mau" out-loud.
@@ -110,39 +110,66 @@
 
                 <div class="points-wrap">
                     <div class="rule-row">
-                        <span>Joker</span>
+                        <div class="flex-col flex-center small-gap">
+                            <img src="./images/cards/Joker.svg" alt="" width="100" height="100"/>
+                            <p>Joker</p>
+                        </div>
                         <span>60</span>
                     </div>
                     <div class="rule-row">
-                        <span>Ace</span>
+                        <div class="flex-col flex-center small-gap">
+                            <img src="./images/cards/ASpades.svg" alt="Ace of spades" width="100" height="100"/>
+                            <p>Ace</p>
+                        </div>
                         <span>50</span>
                     </div>
                     <div class="rule-row">
-                        <span>King</span>
+                        <div class="flex-col flex-center small-gap">
+                            <img src="./images/cards/KDiamonds.svg" alt="" width="100" height="100"/>
+                            <p>King</p>
+                        </div>
                         <span>40</span>
                     </div>
                     <div class="rule-row">
-                        <span>Queen</span>
+                        <div class="flex-col flex-center small-gap">
+                            <img src="./images/cards/QHearts.svg" alt="" width="100" height="100"/>
+                            <p>Queen</p>
+                        </div>
                         <span>30</span>
                     </div>
                     <div class="rule-row">
-                        <span>Jack</span>
+                        <div class="flex-col flex-center small-gap">
+                            <img src="./images/cards/JClubs.svg" alt="" width="100" height="100"/>
+                            <p>Jack</p>
+                        </div>
                         <span>30</span>
                     </div>
                     <div class="rule-row">
-                        <span>Seven</span>
+                        <div class="flex-col flex-center small-gap">
+                            <img src="./images/cards/7Hearts.svg" alt="" width="100" height="100"/>
+                            <p>Seven</p>
+                        </div>
                         <span>20</span>
                     </div>
                     <div class="rule-row">
-                        <span>Eight</span>
+                        <div class="flex-col flex-center small-gap">
+                            <img src="./images/cards/8Clubs.svg" alt="" width="100" height="100"/>
+                            <p>Eight</p>
+                        </div>
                         <span>10</span>
                     </div>
                     <div class="rule-row">
-                        <span>Ten</span>
+                        <div class="flex-col flex-center small-gap">
+                            <img src="./images/cards/10Diamonds.svg" alt="" width="100" height="100"/>
+                            <p>Ten</p>
+                        </div>
                         <span>10</span>
                     </div>
                     <div class="rule-row">
-                        <span>Others</span>
+                        <div class="flex-col flex-center small-gap">
+                            <img src="./images/cards/Stack.svg" alt="" width="100" height="100"/>
+                            <p>Others</p>
+                        </div>
                         <span>5</span>
                     </div>
                 </div>
@@ -213,7 +240,7 @@
         <script type="text/x-template" id="mau-user-header-component">
             <div v-if="user">
                 <div class="flex-row flex-center space-around overflow-show">
-                    <img class="tilted" src="./images/6Spades.svg" alt="six of spades playing card" height="100" width="100"/>
+                    <img class="tilted" src="./images/cards/6Spades.svg" alt="six of spades playing card" height="100" width="100"/>
                     <div class="flex-col small-gap">
                         <p class="text-center title">{{user.username}}</p>
                         <p class="text-center">{{user.firstName}} {{user.lastName}}</p>
@@ -240,8 +267,11 @@
 
         <script type="text/x-template" id="mau-round-component">
             <div class="space-above flex-row row-space-between m-flex-col m-flex-center m-small-gap">
-                <div class="round-row-outer flex-row flex-center">
-                    <span class="green"><b>Round {{ index }}</b></span>
+                <div class="round-row-outer flex-row flex-center small-gap">
+                    <span class="green"><b>Round&nbsp;{{ index }}</b></span>
+                    <div @click="deleteRound" class="flex-row flex-center delete-round m-show">
+                        <img src="./images/icons/trash.svg" alt="trashcan icon - delete round" height="30" width="30"/>
+                    </div>
                 </div>
                 <div class="round-row-inner">
                     <div class="flex-col">
@@ -263,7 +293,7 @@
                         </div>
                     </div>
                 </div>
-                <div @click="deleteRound" class="round-row-outer flex-row flex-center delete-round m-delete">
+                <div @click="deleteRound" class="round-row-outer flex-row flex-center delete-round m-hide">
                     <img src="./images/icons/trash.svg" alt="trashcan icon - delete round" height="30" width="30"/>
                 </div>
             </div>

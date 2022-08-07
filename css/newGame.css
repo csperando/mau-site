@@ -25,9 +25,8 @@
 }
 
 @media screen and (max-width: 768px) {
-    .m-delete {
-        position: absolute;
-        top: 50%;
-        right: -40px;
+    .round-row-outer {
+        flex-basis: 80%;
+        width: 80%;
     }
 }
