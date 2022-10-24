@@ -1,183 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8"/>
-        <!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/> -->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <meta name="description" content="A repository Coleman and Ty's ongoing Mau battles"/>
-        <title>Coleman and Ty Play Mau</title>
-        <link rel="manifest" href="site.webmanifest"/>
-        <meta name="theme-color" content="#ffffff"/>
-        <link rel="icon" type="image/x-icon" href="./favicon.ico"/>
-        <link rel="apple-touch-icon" sizes="180x180" href="./images/apple-touch-icon.png">
 
-        <!-- Import Vue -->
-        <script src="./js/libs/vue.js"></script>
+<head>
+    <meta charset="UTF-8" />
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A repository Coleman and Ty's ongoing Mau battles" />
+    <title>Coleman and Ty Play Mau</title>
+    <link rel="manifest" href="site.webmanifest" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="icon" type="image/x-icon" href="./favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./images/apple-touch-icon.png">
 
-        <!-- Styles -->
-        <link rel="preload" as="style" href="./css/main.css"/>
-        <link rel="stylesheet" type="text/css" href="./css/main.css"/>
+    <!-- Import Vue -->
+    <!-- <script src="./js/libs/vue.js"></script> -->
+    <script src="./js/libs/vue.prod.js"></script>
 
-        <!-- Component Styles -->
-        <link rel="preload" as="style" href="./css/header.css"/>
-        <link rel="stylesheet" type="text/css" href="./css/header.css"/>
+    <!-- Styles -->
+    <link rel="preload" as="style" href="./css/main.css" />
+    <link rel="stylesheet" type="text/css" href="./css/main.css" />
 
-        <link rel="preload" as="style" href="./css/modal.css"/>
-        <link rel="stylesheet" type="text/css" href="./css/modal.css"/>
+    <!-- Component Styles -->
+    <link rel="preload" as="style" href="./css/header.css" />
+    <link rel="stylesheet" type="text/css" href="./css/header.css" />
 
-        <link rel="preload" as="style" href="./css/newGame.css"/>
-        <link rel="stylesheet" type="text/css" href="./css/newGame.css"/>
+    <link rel="preload" as="style" href="./css/modal.css" />
+    <link rel="stylesheet" type="text/css" href="./css/modal.css" />
 
-        <link rel="preload" as="style" href="./css/stats.css"/>
-        <link rel="stylesheet" type="text/css" href="./css/stats.css"/>
+    <link rel="preload" as="style" href="./css/newGame.css" />
+    <link rel="stylesheet" type="text/css" href="./css/newGame.css" />
 
-        <link rel="preload" as="style" href="./css/forms.css"/>
-        <link rel="stylesheet" type="text/css" href="./css/forms.css"/>
+    <link rel="preload" as="style" href="./css/stats.css" />
+    <link rel="stylesheet" type="text/css" href="./css/stats.css" />
 
-        <link rel="preload" as="style" href="./css/bottomSections.css"/>
-        <link rel="stylesheet" type="text/css" href="./css/bottomSections.css"/>
+    <link rel="preload" as="style" href="./css/forms.css" />
+    <link rel="stylesheet" type="text/css" href="./css/forms.css" />
+
+    <link rel="preload" as="style" href="./css/bottomSections.css" />
+    <link rel="stylesheet" type="text/css" href="./css/bottomSections.css" />
 
 
-    </head>
+</head>
 
-    <body>
-        <div class="background"></div>
+<body>
+    <div class="background"></div>
 
-        <div class="full-screen" id="app">
-            <dashboard></dashboard>
+    <div class="full-screen" id="app">
+        <dashboard></dashboard>
+    </div>
+
+    <section class="full-screen space-below overflow-show" id="about-mau">
+        <p class="title space-around text-shadow green"><b>About Mau</b></p>
+        <div class="text-section-wrap">
+            <div class="light-background"></div>
+            <p>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                Mau is a card game that can be classified as a variation of Crazy Eights (Uno). The goal is to get rid
+                of all of your cards the fastest.
+                After that, the rules seem to vary significantly from country to country. Some people play with 32
+                cards, 54 cards, or other variable amounts.
+                Different cards have special rules, for example making your opponent draw extra cards.
+            </p>
+            <br />
+
+            <p>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                There is not a well established <em>standard</em> Mau-Mau ruleset.
+                Below I'll describe how my girlfriend and I like to play 1-V-1. In essence, Mau is a game of savagery.
+                You can try any insidious strategy you like, but
+                if you get caught, then you'll pay for it. Basically, if you are not trying to cause as much emotional
+                damage and embarassment to the other player, then you're playing wrong.
+            </p>
+            <br />
         </div>
+    </section>
 
-        <section class="full-screen space-below overflow-show" id="about-mau">
-            <p class="title space-around text-shadow green"><b>About Mau</b></p>
-            <div class="text-section-wrap">
-                <div class="light-background"></div>
-                <p>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    Mau is a card game that can be classified as a variation of Crazy Eights (Uno). The goal is to get rid of all of your cards the fastest.
-                    After that, the rules seem to vary significantly from country to country. Some people play with 32 cards, 54 cards, or other variable amounts.
-                    Different cards have special rules, for example making your opponent draw extra cards.
-                </p>
-                <br/>
+    <section class="full-screen space-below overflow-show" id="rules-mau">
+        <p class="title space-around text-shadow green"><b>Rules</b></p>
+        <div class="text-section-wrap">
+            <div class="light-background"></div>
+            <p>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                We play with a <b>56</b> card deck (4 jokers). Each player starts with <b>7</b> cards. The dealer is the
+                loser of the last round. Once all cards are dealt, the top card of the deck is palced face up. Then each
+                player
+                takes turns playing a card that is either the same rank, same suit, or wild. Alternatively, you can draw
+                a card from the top of the deck instead of playing a card whenever you
+                feel like it. You can only draw one card per turn, but if the card you draw is playable then you can
+                play the card. However, if the card touches the other cards in your hand,
+                then you can no longer play it. If you accidentally knock over any cards, then you have to keep any card
+                who's face you saw. When you have one card left you have to say "Mau" out-loud.
+                If you do not before your opponent finishes their next move, then they can call "Mau" on you, and you
+                have to take 2 cards. As soon as one person has no cards left, the round is over.
+                The loser then adds the point value of every card in their hand, and that is their final score for the
+                round. Once a player exceeds <b>300</b> points, then they lose the game.
+            </p>
+            <br />
 
-                <p>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    There is not a well established <em>standard</em> Mau-Mau ruleset.
-                    Below I'll describe how my girlfriend and I like to play 1-V-1. In essence, Mau is a game of savagery. You can try any insidious strategy you like, but
-                    if you get caught, then you'll pay for it. Basically, if you are not trying to cause as much emotional damage and embarassment to the other player, then you're playing wrong.
-                </p>
-                <br/>
-            </div>
-        </section>
+            <p>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                We only play with 4 special cards, <b>eights</b>, <b>jacks</b>, <b>sevens</b>, and <b>jokers</b>. The
+                eight skips the other player's turn, the joker is a wild (changes suit), and the seven and joker are
+                draw cards. The seven can only be played on the same suit or a seven/joker, however the joker
+                is wild and can be played on any other card. Sevens mean draw <b>2</b>, and jokers mean draw <b>4</b>.
+                All draw cards can be <b>countered</b> by another draw card indefinitely. When this happens, the total
+                number
+                of cards required to be drawn by the loser of the exchange is the sum off all the draw cards. For
+                example, if player 1 plays a seven, player 2 plays a joker, and then player 1 plays a joker then
+                player 2 will have to draw 10 cards. If the last card to be played is a jack, the the loser's final
+                score for that round is <b>doubled</b>.
+            </p>
+            <br />
 
-        <section class="full-screen space-below overflow-show" id="rules-mau">
-            <p class="title space-around text-shadow green"><b>Rules</b></p>
-            <div class="text-section-wrap">
-                <div class="light-background"></div>
-                <p>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    We play with a <b>56</b> card deck (4 jokers). Each player starts with <b>7</b> cards. The dealer is the loser of the last round. Once all cards are dealt, the top card of the deck is palced face up. Then each player
-                    takes turns playing a card that is either the same rank, same suit, or wild. Alternatively, you can draw a card from the top of the deck instead of playing a card whenever you
-                    feel like it. You can only draw one card per turn, but if the card you draw is playable then you can play the card. However, if the card touches the other cards in your hand,
-                    then you can no longer play it. If you accidentally knock over any cards, then you have to keep any card who's face you saw. When you have one card left you have to say "Mau" out-loud.
-                    If you do not before your opponent finishes their next move, then they can call "Mau" on you, and you have to take 2 cards. As soon as one person has no cards left, the round is over.
-                    The loser then adds the point value of every card in their hand, and that is their final score for the round. Once a player exceeds <b>300</b> points, then they lose the game.
-                </p>
-                <br/>
+            <p>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                You can play multiple cards at a time if they are the same rank (<em>i.e. the five of diamonds and the
+                    five of hearts</em>). If there are ever four of a kind played in a row (not necessarily by the same
+                person),
+                then the game is over and whoever finished the four of a kind wins. You can also try to be sneaky. When
+                dealing at the start of the game, feel free to deal extra cards to your opponents. Once anyone see the
+                face of
+                a card, then it is theirs to keep. When playing multiple cards at once, sneak in an extra if you feel so
+                bold. Play a six on a nine. However, if you get called out on any shenanigans, then you have to draw 2
+                cards.
+            </p>
+            <br />
+        </div>
+    </section>
 
-                <p>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    We only play with 4 special cards, <b>eights</b>, <b>jacks</b>, <b>sevens</b>, and <b>jokers</b>. The eight skips the other player's turn, the joker is a wild (changes suit), and the seven and joker are draw cards. The seven can only be played on the same suit or a seven/joker, however the joker
-                    is wild and can be played on any other card. Sevens mean draw <b>2</b>, and jokers mean draw <b>4</b>. All draw cards can be <b>countered</b> by another draw card indefinitely. When this happens, the total number
-                    of cards required to be drawn by the loser of the exchange is the sum off all the draw cards. For example, if player 1 plays a seven, player 2 plays a joker, and then player 1 plays a joker then
-                    player 2 will have to draw 10 cards. If the last card to be played is a jack, the the loser's final score for that round is <b>doubled</b>.
-                </p>
-                <br/>
+    <section class="full-screen space-below overflow-show" id="points-mau">
+        <p class="title space-around text-shadow green"><b>Points</b></p>
+        <div class="text-section-wrap">
+            <div class="light-background"></div>
 
-                <p>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    You can play multiple cards at a time if they are the same rank (<em>i.e. the five of diamonds and the five of hearts</em>). If there are ever four of a kind played in a row (not necessarily by the same person),
-                    then the game is over and whoever finished the four of a kind wins. You can also try to be sneaky. When dealing at the start of the game, feel free to deal extra cards to your opponents. Once anyone see the face of
-                    a card, then it is theirs to keep. When playing multiple cards at once, sneak in an extra if you feel so bold. Play a six on a nine. However, if you get called out on any shenanigans, then you have to draw 2 cards.
-                </p>
-                <br/>
-            </div>
-        </section>
-
-        <section class="full-screen space-below overflow-show" id="points-mau">
-            <p class="title space-around text-shadow green"><b>Points</b></p>
-            <div class="text-section-wrap">
-                <div class="light-background"></div>
-
-                <div class="points-wrap">
-                    <div class="rule-row">
-                        <div class="flex-col flex-center small-gap">
-                            <img src="./images/cards/Joker.svg" alt="" width="100" height="100"/>
-                            <p>Joker</p>
-                        </div>
-                        <span>60</span>
+            <div class="points-wrap">
+                <div class="rule-row">
+                    <div class="flex-col flex-center small-gap">
+                        <img src="./images/cards/Joker.svg" alt="" width="100" height="100" />
+                        <p>Joker</p>
                     </div>
-                    <div class="rule-row">
-                        <div class="flex-col flex-center small-gap">
-                            <img src="./images/cards/ASpades.svg" alt="Ace of spades" width="100" height="100"/>
-                            <p>Ace</p>
-                        </div>
-                        <span>50</span>
+                    <span>60</span>
+                </div>
+                <div class="rule-row">
+                    <div class="flex-col flex-center small-gap">
+                        <img src="./images/cards/ASpades.svg" alt="Ace of spades" width="100" height="100" />
+                        <p>Ace</p>
                     </div>
-                    <div class="rule-row">
-                        <div class="flex-col flex-center small-gap">
-                            <img src="./images/cards/KDiamonds.svg" alt="" width="100" height="100"/>
-                            <p>King</p>
-                        </div>
-                        <span>40</span>
+                    <span>50</span>
+                </div>
+                <div class="rule-row">
+                    <div class="flex-col flex-center small-gap">
+                        <img src="./images/cards/KDiamonds.svg" alt="" width="100" height="100" />
+                        <p>King</p>
                     </div>
-                    <div class="rule-row">
-                        <div class="flex-col flex-center small-gap">
-                            <img src="./images/cards/QHearts.svg" alt="" width="100" height="100"/>
-                            <p>Queen</p>
-                        </div>
-                        <span>30</span>
+                    <span>40</span>
+                </div>
+                <div class="rule-row">
+                    <div class="flex-col flex-center small-gap">
+                        <img src="./images/cards/QHearts.svg" alt="" width="100" height="100" />
+                        <p>Queen</p>
                     </div>
-                    <div class="rule-row">
-                        <div class="flex-col flex-center small-gap">
-                            <img src="./images/cards/JClubs.svg" alt="" width="100" height="100"/>
-                            <p>Jack</p>
-                        </div>
-                        <span>30</span>
+                    <span>30</span>
+                </div>
+                <div class="rule-row">
+                    <div class="flex-col flex-center small-gap">
+                        <img src="./images/cards/JClubs.svg" alt="" width="100" height="100" />
+                        <p>Jack</p>
                     </div>
-                    <div class="rule-row">
-                        <div class="flex-col flex-center small-gap">
-                            <img src="./images/cards/7Hearts.svg" alt="" width="100" height="100"/>
-                            <p>Seven</p>
-                        </div>
-                        <span>20</span>
+                    <span>30</span>
+                </div>
+                <div class="rule-row">
+                    <div class="flex-col flex-center small-gap">
+                        <img src="./images/cards/7Hearts.svg" alt="" width="100" height="100" />
+                        <p>Seven</p>
                     </div>
-                    <div class="rule-row">
-                        <div class="flex-col flex-center small-gap">
-                            <img src="./images/cards/8Clubs.svg" alt="" width="100" height="100"/>
-                            <p>Eight</p>
-                        </div>
-                        <span>10</span>
+                    <span>20</span>
+                </div>
+                <div class="rule-row">
+                    <div class="flex-col flex-center small-gap">
+                        <img src="./images/cards/8Clubs.svg" alt="" width="100" height="100" />
+                        <p>Eight</p>
                     </div>
-                    <div class="rule-row">
-                        <div class="flex-col flex-center small-gap">
-                            <img src="./images/cards/10Diamonds.svg" alt="" width="100" height="100"/>
-                            <p>Ten</p>
-                        </div>
-                        <span>10</span>
+                    <span>10</span>
+                </div>
+                <div class="rule-row">
+                    <div class="flex-col flex-center small-gap">
+                        <img src="./images/cards/10Diamonds.svg" alt="" width="100" height="100" />
+                        <p>Ten</p>
                     </div>
-                    <div class="rule-row">
-                        <div class="flex-col flex-center small-gap">
-                            <img src="./images/cards/stack.svg" alt="" width="100" height="100"/>
-                            <p>Others</p>
-                        </div>
-                        <span>5</span>
+                    <span>10</span>
+                </div>
+                <div class="rule-row">
+                    <div class="flex-col flex-center small-gap">
+                        <img src="./images/cards/stack.svg" alt="" width="100" height="100" />
+                        <p>Others</p>
                     </div>
+                    <span>5</span>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
 
-        <script type="text/x-template" id="mau-login-component">
+    <script type="text/x-template" id="mau-login-component">
             <div class="modal-form-wrap">
                 <form @submit.prevent="loginUser" class="flex-col col-center small-gap">
                     <div class="flex-row small-gap m-flex-col m-flex-center">
@@ -197,7 +222,7 @@
             </div>
         </script>
 
-        <script type="text/x-template" id="mau-signup-component">
+    <script type="text/x-template" id="mau-signup-component">
             <div class="modal-form-wrap">
                 <form @submit.prevent="signupUser" class="flex-col col-center small-gap">
                     <div class="flex-row small-gap m-flex-col m-flex-center">
@@ -237,7 +262,7 @@
             </div>
         </script>
 
-        <script type="text/x-template" id="mau-user-header-component">
+    <script type="text/x-template" id="mau-user-header-component">
             <div v-if="user">
                 <div class="flex-row flex-center space-around overflow-show">
                     <img class="tilted" src="./images/cards/6Spades.svg" alt="six of spades playing card" height="100" width="100"/>
@@ -249,7 +274,7 @@
             </div>
         </script>
 
-        <script type="text/x-template" id="mau-settings-component">
+    <script type="text/x-template" id="mau-settings-component">
             <div class="modal-form-wrap">
                 <form class="flex-col col-center small-gap">
                     <div class="flex-row small-gap">
@@ -265,7 +290,7 @@
             </div>
         </script>
 
-        <script type="text/x-template" id="mau-round-component">
+    <script type="text/x-template" id="mau-round-component">
             <div class="space-above flex-row row-space-between m-flex-col m-flex-center m-small-gap">
                 <div class="round-row-outer flex-row flex-center small-gap">
                     <span class="green"><b>Round&nbsp;{{ index }}</b></span>
@@ -299,7 +324,7 @@
             </div>
         </script>
 
-        <script type="text/x-template" id="mau-new-game-component">
+    <script type="text/x-template" id="mau-new-game-component">
             <form @submit.prevent="submitGame">
                 <p class="text-center"><b>Add a New Game!</b></p>
 
@@ -355,7 +380,7 @@
             </form>
         </script>
 
-        <script type="text/x-template" id="mau-menu-component">
+    <script type="text/x-template" id="mau-menu-component">
             <div>
                 <div v-show="loggedOut" class="flex-col flex-center small-gap">
                     <span class="modal-menu-option"
@@ -407,7 +432,7 @@
             </div>
         </script>
 
-        <script type="text/x-template" id="mau-modal-view-component">
+    <script type="text/x-template" id="mau-modal-view-component">
             <div v-if="view == 'newGame'">
                 <new-game></new-game>
             </div>
@@ -422,7 +447,7 @@
             </div>
         </script>
 
-        <script type="text/x-template" id="mau-modal-component">
+    <script type="text/x-template" id="mau-modal-component">
             <div
                 @click="hideModal"
                 v-show="modalActive"
@@ -438,7 +463,7 @@
             </div>
         </script>
 
-        <script type="text/x-template" id="mau-header-component">
+    <script type="text/x-template" id="mau-header-component">
             <header>
                 <nav class="mau-nav">
                     <span></span>
@@ -449,7 +474,7 @@
             </header>
         </script>
 
-        <script type="text/x-template" id="mau-stats-component">
+    <script type="text/x-template" id="mau-stats-component">
             <div>
                 <div v-if="!loadingStats" class="stat-names-wrap">
                     <span class="stat-name-left green m-stat-name">Ty</span>
@@ -507,7 +532,7 @@
             </div>
         </script>
 
-        <script type="text/x-template" id="dashboard-component">
+    <script type="text/x-template" id="dashboard-component">
             <div>
                 <mau-header @toggle-modal="toggleModal"></mau-header>
 
@@ -527,15 +552,16 @@
             </div>
         </script>
 
-        <script src="./components/app.vue"></script>
+    <script src="./components/app.vue"></script>
 
-        <script>
-            window.addEventListener("load", () => {
-                if ("serviceWorker" in navigator) {
-                    navigator.serviceWorker.register("./service-worker.js");
-                }
-            });
-        </script>
+    <script>
+        window.addEventListener("load", () => {
+            if ("serviceWorker" in navigator) {
+                navigator.serviceWorker.register("./service-worker.js");
+            }
+        });
+    </script>
 
-    </body>
+</body>
+
 </html>
