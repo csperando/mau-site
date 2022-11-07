@@ -330,7 +330,7 @@ let mauStats = {
         getWins: function() {
             try {
                 var wins = this.games.map((obj) => {
-                    return obj.winner.name;
+                    return obj.winner.name.trim();
                 });
 
                 var ty = wins.filter((el) => {
@@ -371,7 +371,7 @@ let mauStats = {
                     var streakT = 0;
 
                     for(var round of game.rounds) {
-                        if(round.winner.name == "Ty") {
+                        if(round.winner.name.trim() == "Ty") {
                              streakT += 1;
                              ty = (streakT > ty) ? streakT : ty;
                              streakC = 0;
@@ -394,7 +394,7 @@ let mauStats = {
                 var array = [0];
                 for(var game of this.games) {
                     for(var round of game.rounds) {
-                        array.push((round.winner.name === "Ty") ? round.points : -1 * round.points);
+                        array.push((round.winner.name.trim() === "Ty") ? round.points : -1 * round.points);
                     }
                 }
 
