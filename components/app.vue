@@ -16,7 +16,7 @@ let login = {
                 password: this.password
             };
 
-            const loginReq = fetch("https://mau-rest.herokuapp.com/auth/login",
+            const loginReq = fetch("https://sprightly-belekoy-b5fab1.netlify.app/auth/login",
             {
                 method: "POST",
                 mode: "cors",
@@ -79,7 +79,7 @@ let signup = {
                 return;
             }
 
-            const signupReq = fetch("https://mau-rest.herokuapp.com/auth/signup",
+            const signupReq = fetch("https://sprightly-belekoy-b5fab1.netlify.app/auth/signup",
             {
                 method: "POST",
                 mode: "cors",
@@ -176,7 +176,7 @@ let newGame = {
                 return;
             }
 
-            const req = fetch("https://mau-rest.herokuapp.com/mau", {
+            const req = fetch("https://sprightly-belekoy-b5fab1.netlify.app/mau", {
                 method: "POST",
                 mode: "cors",
                 headers: {
@@ -438,7 +438,7 @@ let dashboard = {
         "modal": modal
     },
     created: function() {
-        const g = fetch("https://mau-rest.herokuapp.com/mau");
+        const g = fetch("https://sprightly-belekoy-b5fab1.netlify.app/mau");
         g.then((res) => {
             return res.json();
 
@@ -462,7 +462,7 @@ let dashboard = {
             })[0];
             uid = ("u" in uid) ? uid.u : "";
 
-            const u = fetch("https://mau-rest.herokuapp.com/auth/login/" + uid);
+            const u = fetch("https://sprightly-belekoy-b5fab1.netlify.app/auth/login/" + uid);
             u.then((res) => {
                 return res.json();
 
